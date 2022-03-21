@@ -14,6 +14,7 @@ import com.codename1.ui.TextField;
 import com.codename1.ui.util.Resources;
 import com.mycompany.myapp.entities.User;
 import com.mycompany.myapp.gui.ProfileForm;
+import com.mycompany.myapp.gui.ResetPasswordForm;
 import com.mycompany.myapp.utils.Statics;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class ServiceUser {
     public static ServiceUser instance = null;
     public boolean resultOK;
     private ConnectionRequest req;
+    String json;
     
     public ServiceUser() {
         req = new ConnectionRequest();
@@ -79,13 +81,7 @@ public class ServiceUser {
 String url = Statics.BASE_URL + "signUpJson?nom="+nom.getText()+"&prenom="+prenom.getText()+"&username="+username.getText()+"&email="+email.getText()+"&password="+password.getText();
        req.setUrl(url);
        
-       if(username.getText().equals(" ")&& password.getText().equals(" ")&&nom.getText().equals(" ")&&
-               prenom.getText().equals(" ")&&email.getText().equals(" ")){
-           
-           Dialog.show("Erreur","Veuillez remplir les champs","OK",null);
-       }else if(!password.getText().equals(confirm_password.getText())){
-            Dialog.show("Erreur","Verifiez votre mot de passe","OK",null);
-       }else
+       
        req.addResponseListener((e)->{
                  byte[]data=(byte[])e.getMetaData();
                  String responseData = new String(data);
@@ -98,31 +94,48 @@ String url = Statics.BASE_URL + "signUpJson?nom="+nom.getText()+"&prenom="+preno
      }
      
      
-     public boolean signIn(TextField username, TextField password,Resources res){
-         String url = Statics.BASE_URL + "signInJson?username="+username.getText()+"&password="+password.getText();
+     public void signIn(TextField username, TextField password,Resources res){
+         String url = Statics.BASE_URL + "signInJson?username="+username.getText().toString()+"&password="+password.getText().toString();
        req.setUrl(url);
        req.addResponseListener((e)->{
             JSONParser j = new JSONParser();
-            String json = new String(req.getResponseData())+" ";
+             String json = new String(req.getResponseData()) + "";
             try{
-            if(json.equals("Erreur")){
+            if(json.equals("failed")){
                 Dialog.show("Echec d'authentification", "Verifier votre mot de passe ou username","Ok", null);
             }else {
                 System.out.println("data=="+json);
                 Map<String, Object> user = j.parseJSON(new CharArrayReader(json.toCharArray()));
                 if(user.size()>0)
                     new ProfileForm(res).show();
-                    
-                
+     
             }
             }catch(Exception ex)  {
-                ex.printStackTrace();
+                System.out.println(ex.getMessage());
             }
              });
-       return resultOK;
+       
        }
      
      
-     
-     
+     public String ForgetPass(TextField email,Resources res){
+         String url = Statics.BASE_URL+"oubliPassJSON?email="+email.getText();
+       req.setUrl(url);
+             req.addResponseListener((e) ->{
+            
+            JSONParser j = new JSONParser();
+             json = new String(req.getResponseData()) + "";
+            try {
+                System.out.println("data =="+json);
+                Map<String,Object> password = j.parseJSON(new CharArrayReader(json.toCharArray()));
+      
+            }catch(Exception ex) {
+                ex.printStackTrace();
+            }
+        
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return json;
+   
+}
 }

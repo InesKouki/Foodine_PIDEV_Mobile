@@ -15,6 +15,8 @@ import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
 import com.codename1.ui.Toolbar;
+import com.codename1.ui.events.ActionEvent;
+import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
@@ -30,7 +32,7 @@ public class LoginForm extends Form {
         super(new BorderLayout(BorderLayout.CENTER_BEHAVIOR_CENTER_ABSOLUTE));
         setUIID("LoginForm");
         Container welcome = FlowLayout.encloseCenter(
-                new Label("Welcome, ", "WelcomeWhite"),
+                new Label("Bienvenue ", "WelcomeWhite"),
                 new Label("", "WelcomeBlue")
         );
         
@@ -50,18 +52,31 @@ public class LoginForm extends Form {
         
         Button loginButton = new Button("LOGIN");
         loginButton.setUIID("LoginButton");
-        loginButton.addActionListener(e -> {
-             ServiceUser.getInstance().signIn(login,password,theme);
-            Dialog.show("Success", "Authentification reussi", "Ok", null);
-             new ProfileForm(theme).show();
+        loginButton.addActionListener(new ActionListener()  {
+             @Override
+            public void actionPerformed(ActionEvent evt) {
+          if(login.getText().length()==0 || password.getText().length()==0){
+           
+           Dialog.show("Erreur","Veuillez remplir les champs","OK",null);  
+          }else {
+                ServiceUser.getInstance().signIn(login,password,theme);
+                 //Dialog.show("Succes", "Authentification réussie","Ok", null);
+                 //new ProfileForm(theme).show();
+          }
+            }
         });
         
-        Button createNewAccount = new Button("CREATE NEW ACCOUNT");
+        Button createNewAccount = new Button("Créer un nouveau compte");
+        Button forgetPassword = new Button("Mot de passe oublié");
         createNewAccount.addActionListener(e -> {
             new SignUpForm(theme).show();
         });
         createNewAccount.setUIID("CreateNewAccountButton");
+        forgetPassword.setUIID("CreateNewAccountButton");
         
+         forgetPassword.addActionListener(e -> {
+            new ForgetPasswordForm(theme).show();
+        });
         // We remove the extra space for low resolution devices so things fit better
         Label spaceLabel;
         if(!Display.getInstance().isTablet() && Display.getInstance().getDeviceDensity() < Display.DENSITY_VERY_HIGH) {
@@ -80,7 +95,8 @@ public class LoginForm extends Form {
                 BorderLayout.center(password).
                         add(BorderLayout.WEST, passwordIcon),
                 loginButton,
-                createNewAccount
+                createNewAccount,
+                forgetPassword
         );
         add(BorderLayout.CENTER, by);
         

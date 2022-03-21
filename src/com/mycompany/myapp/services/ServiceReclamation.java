@@ -25,7 +25,7 @@ import java.util.Map;
  * @author ASUS
  */
 public class ServiceReclamation {
-     public ArrayList<Reclamation> reclamation;
+    public ArrayList<Reclamation> reclamation;
 
     public static ServiceReclamation instance = null;
     public boolean resultOK;

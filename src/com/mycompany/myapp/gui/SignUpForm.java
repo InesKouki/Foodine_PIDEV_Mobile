@@ -54,10 +54,18 @@ public class SignUpForm extends Form {
         
         Button signUp = new Button("SignUp");
         signUp.setUIID("LoginButton");
-        signUp.addActionListener((e)->{
+       signUp.addActionListener((e)->{
+           if(username.getText().length()==0 || password.getText().length()==0&&nom.getText().length()==0||
+               prenom.getText().length()==0||email.getText().length()==0){
+           
+           Dialog.show("Erreur","Veuillez remplir les champs","OK",null);
+       }else if(!password.getText().equals(confirm_password.getText())){
+            Dialog.show("Erreur","Verifiez votre mot de passe","OK",null);
+       }else{
             ServiceUser.getInstance().signUp(username,password,email,confirm_password,nom,prenom);
             Dialog.show("Success", "Compte crée avec sucess", "Ok", null);
              new LoginForm(theme).show();
+       }
         });
         
         Button signIn = new Button("Already have an account?");
