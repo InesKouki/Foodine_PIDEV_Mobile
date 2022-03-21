@@ -204,4 +204,19 @@ String url = Statics.BASE_URL + "signUpJson?nom="+nom.getText()+"&prenom="+preno
         NetworkManager.getInstance().addToQueueAndWait(req);
         return resultOK;
     }
+    
+    public boolean roleUser(User t) { 
+        String url = Statics.BASE_URL + "roleJson/"+t.getId()+"?Role="+t.getRoles()+"";
+
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }
 }

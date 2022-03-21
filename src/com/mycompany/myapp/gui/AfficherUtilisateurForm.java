@@ -13,6 +13,7 @@ import static com.codename1.ui.Component.CENTER;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.FontImage;
+import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.layouts.BorderLayout;
@@ -22,14 +23,16 @@ import com.codename1.ui.plaf.Border;
 import com.codename1.ui.util.Resources;
 import com.mycompany.myapp.entities.User;
 import com.mycompany.myapp.services.ServiceUser;
+import static java.util.concurrent.ThreadLocalRandom.current;
 
 /**
  *
  * @author Asus
  */
 public class AfficherUtilisateurForm extends SideMenuBaseForm{
-
+ Form current;
      public AfficherUtilisateurForm(Resources res){
+         
        super(BoxLayout.y());
         Toolbar tb = getToolbar();
         tb.setTitleCentered(false);
@@ -101,6 +104,10 @@ public class AfficherUtilisateurForm extends SideMenuBaseForm{
         Container cnt2 = new Container(BoxLayout.y());
         cnt2.add(cnt1);
         
+        RoleButton.addActionListener((e) -> {
+           new AttribuerRoleForm(current, r).show();
+        }
+        );
   btnsupprimer.addPointerPressedListener(l->{
            Dialog dig = new Dialog("Suppresion");
            if(dig.show("Supprimer","Voulez-vous supprimer cette utilisateur","Annuler","Oui")){
