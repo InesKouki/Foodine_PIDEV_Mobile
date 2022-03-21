@@ -8,9 +8,11 @@ package com.mycompany.myapp.services;
 import com.codename1.io.CharArrayReader;
 import com.codename1.io.ConnectionRequest;
 import com.codename1.io.JSONParser;
+import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.TextField;
+import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.util.Resources;
 import com.mycompany.myapp.entities.User;
 import com.mycompany.myapp.gui.ProfileForm;
@@ -58,12 +60,13 @@ public class ServiceUser {
 
                 User u = new User();
                 u.setId(((int) Float.parseFloat(obj.get("id").toString())));
-                u.setNom(obj.get("nom").toString());
-                u.setUsername(obj.get("username").toString());
-                u.setPassword(obj.get("password").toString());
-                u.setPrenom(obj.get("prenom").toString());
+                u.setEtat(((int) Float.parseFloat(obj.get("Etat").toString())));
+                u.setNom(obj.get("Nom").toString());
+                u.setUsername(obj.get("Username").toString());
+                //u.setPassword(obj.get("password").toString());
+                u.setPrenom(obj.get("Prenom").toString());
                 u.setEmail(obj.get("email").toString());
-                u.setRoles(obj.get("roles").toString());
+                u.setRoles(obj.get("Roles").toString());
               
                 users.add(u);
             }
@@ -138,4 +141,67 @@ String url = Statics.BASE_URL + "signUpJson?nom="+nom.getText()+"&prenom="+preno
         return json;
    
 }
+     
+     public ArrayList<User> getAllUsers(){
+        req = new ConnectionRequest();
+        String url = Statics.BASE_URL+"showUserJson";
+      
+        req.setUrl(url);
+        req.setPost(false);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                users = parseUsers(new String(req.getResponseData()));
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return users;
+    }
+     
+     
+      public boolean bloquerUser(int i) {
+        String url = Statics.BASE_URL + "blockUserJson/" + i;
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200;
+                req.removeResponseListener(this);
+
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }
+      
+      public boolean debloquerUser(int i) {
+        String url = Statics.BASE_URL + "unblockUserJson/" + i;
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200;
+                req.removeResponseListener(this);
+
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }
+   
+    public boolean deleteUser(int id) {
+      String url = Statics.BASE_URL + "deleteUserJson/" + id;
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200;
+                req.removeResponseListener(this);
+
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }
 }

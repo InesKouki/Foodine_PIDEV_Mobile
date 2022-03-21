@@ -49,7 +49,7 @@ public abstract class SideMenuBaseForm extends Form {
         getToolbar().addComponentToSideMenu(sidemenuTop);
         getToolbar().addMaterialCommandToSideMenu("Home", FontImage.MATERIAL_DASHBOARD,  e -> new ProfileForm(res).show());
         getToolbar().addMaterialCommandToSideMenu("Contact", FontImage.MATERIAL_TRENDING_UP,  e -> new AjouterReclamationForm(res).show());
-        //getToolbar().addMaterialCommandToSideMenu("Review", FontImage.MATERIAL_ACCESS_TIME,  e -> new AjouterAvisForm(res).show());
+        getToolbar().addMaterialCommandToSideMenu("Review", FontImage.MATERIAL_ACCESS_TIME,  e -> new AfficherAvisForm(res).show());
         //getToolbar().addMaterialCommandToSideMenu("Account Settings", FontImage.MATERIAL_SETTINGS,  e -> new UpdateProfileForm(res));
         getToolbar().addMaterialCommandToSideMenu("Logout", FontImage.MATERIAL_EXIT_TO_APP,  e -> new LoginForm(res).show());
     }
