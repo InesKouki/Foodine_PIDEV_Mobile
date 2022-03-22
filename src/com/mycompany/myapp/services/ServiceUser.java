@@ -98,27 +98,45 @@ String url = Statics.BASE_URL + "signUpJson?nom="+nom.getText()+"&prenom="+preno
      
      
      public void signIn(TextField username, TextField password,Resources res){
-         String url = Statics.BASE_URL + "signInJson?username="+username.getText().toString()+"&password="+password.getText().toString();
-       req.setUrl(url);
-       req.addResponseListener((e)->{
+         String url = Statics.BASE_URL + "signInJson?username="+username.getText()+"&password="+password.getText();
+        req = new ConnectionRequest(url, false); //false ya3ni url mazlt matba3thtich lel server
+        req.setUrl(url);
+        
+        req.addResponseListener((e) ->{
+            
             JSONParser j = new JSONParser();
-             String json = new String(req.getResponseData()) + "";
-            try{
-            if(json.equals("failed")){
-                Dialog.show("Echec d'authentification", "Verifier votre mot de passe ou username","Ok", null);
-            }else {
-                System.out.println("data=="+json);
-                Map<String, Object> user = j.parseJSON(new CharArrayReader(json.toCharArray()));
-                if(user.size()>0)
+            
+            String json = new String(req.getResponseData()) + "";
+         
+            try {
+            
+            if(json.equals("Utilisteur invalide")) {
+                Dialog.show("Echec d'authentification","Username éronné","OK",null);
+            }else if (json.equals("Mot de passe invalide"))
+                Dialog.show("Echec d'authentification"," mot de passe éronné","OK",null);
+            else {
+                System.out.println("data =="+json);
+                
+                Map<String,Object> user = j.parseJSON(new CharArrayReader(json.toCharArray()));
+         
+                if(user.size() >0 ) // l9a user
+                   // new ListReclamationForm(rs).show();//yemchi lel list reclamation
                     new ProfileForm(res).show();
-     
+                    
+                    }
+            
+            }catch(Exception ex) {
+                ex.printStackTrace();
             }
-            }catch(Exception ex)  {
-                System.out.println(ex.getMessage());
-            }
-             });
-       
-       }
+            
+            
+            
+        });
+    
+         //ba3d execution ta3 requete ely heya url nestanaw response ta3 server.
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        
+    }
      
      
      public String ForgetPass(TextField email,Resources res){

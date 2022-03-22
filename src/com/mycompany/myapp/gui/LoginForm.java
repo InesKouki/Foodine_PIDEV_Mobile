@@ -59,9 +59,9 @@ public class LoginForm extends Form {
            
            Dialog.show("Erreur","Veuillez remplir les champs","OK",null);  
           }else {
-                ServiceUser.getInstance().signIn(login,password,theme);
-                 //Dialog.show("Succes", "Authentification réussie","Ok", null);
-                 //new ProfileForm(theme).show();
+                   ServiceUser.getInstance().signIn(login,password,theme);
+                
+                 
           }
             }
         });
