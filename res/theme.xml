@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <resource majorVersion="1" minorVersion="11" useXmlUI="false">
+    <image name="2021_01_18_109951_1610963733._large.jpg"  />
     <image name="BackgroundRect.png" type="multi"  />
     <image name="duke.png" type="multi"  />
     <image name="food.jpg"  />
@@ -37,13 +38,13 @@
         <val key="CenterSubTitle.padding" value="1.0,1.0,1.0,1.0" />
         <val key="CenterSubTitle.transparency" value="0" />
         <val key="CenterTitle.align" value="4" />
-        <val key="CenterTitle.fgColor" value="ffffff" />
+        <val key="CenterTitle.fgColor" value="0" />
         <font key="CenterTitle.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="4.5" />
         <val key="CenterTitle.margin" value="0.0,0.0,0.0,0.0" />
         <val key="CenterTitle.padUnit" value="2,2,2,2" />
         <val key="CenterTitle.padding" value="1.0,1.0,1.0,1.0" />
         <val key="CenterTitle.transparency" value="0" />
-        <val key="CompletedTasks.bgColor" value="ff7fe5" />
+        <val key="CompletedTasks.bgColor" value="ff6600" />
         <val key="CompletedTasks.margin" value="0.0,0.0,0.0,0.0" />
         <val key="CompletedTasks.padUnit" value="2,2,2,2" />
         <val key="CompletedTasks.padding" value="3.0,3.0,0.0,0.0" />
@@ -53,7 +54,7 @@
         <val key="Container.press#transparency" value="0" />
         <val key="CreateNewAccountButton.align" value="4" />
         <val key="CreateNewAccountButton.bgColor" value="4bc2ff" />
-        <val key="CreateNewAccountButton.fgColor" value="0" />
+        <val key="CreateNewAccountButton.fgColor" value="ffffff" />
         <font key="CreateNewAccountButton.font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="2.5" />
         <val key="CreateNewAccountButton.press#align" value="4" />
         <val key="CreateNewAccountButton.press#bgColor" value="4bc2ff" />
@@ -75,6 +76,8 @@
         <val key="FloatingActionButton.sel#fgColor" value="0" />
         <val key="FloatingActionButton.sel#transparency" value="0" />
         <val key="FloatingActionButton.transparency" value="0" />
+        <val key="Label.bgColor" value="0" />
+        <val key="Label.fgColor" value="0" />
         <val key="Label.press#transparency" value="0" />
         <val key="Label.sel#transparency" value="0" />
         <val key="Label.transparency" value="0" />
@@ -124,7 +127,7 @@
         <val key="ProfilePicTitle.padUnit" value="2,2,2,2" />
         <val key="ProfilePicTitle.padding" value="1.0,3.0,2.0,2.0" />
         <val key="ProfilePicTitle.transparency" value="0" />
-        <val key="RemainingTasks.bgColor" value="4dc2ff" />
+        <val key="RemainingTasks.bgColor" value="ff6633" />
         <val key="RemainingTasks.margin" value="0.0,0.0,0.0,0.0" />
         <val key="RemainingTasks.padUnit" value="2,0,2,0" />
         <val key="RemainingTasks.padding" value="3.0,3.0,0.0,0.0" />
@@ -153,27 +156,27 @@
         <val key="SideCommand.sel#transparency" value="0" />
         <val key="SideCommand.textDecoration" value="0" />
         <val key="SideCommand.transparency" value="0" />
-        <val key="SideMenuTitle.fgColor" value="ffffff" />
+        <val key="SideMenuTitle.fgColor" value="333333" />
         <font key="SideMenuTitle.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="3.5" />
         <val key="SideMenuTitle.margin" value="0.0,0.0,0.0,0.0" />
         <val key="SideMenuTitle.padUnit" value="2,2,2,2" />
         <val key="SideMenuTitle.padding" value="1.0,1.0,1.0,1.0" />
         <val key="SideMenuTitle.transparency" value="0" />
-        <val key="SideNavigationPanel.bgColor" value="1d224b" />
+        <val key="SideNavigationPanel.bgColor" value="666666" />
         <gradient key="SideNavigationPanel.bgGradient" color1="0" color2="0" posX="0.5" posY="0.5" radius="1.0" />
         <val key="SideNavigationPanel.bgType" value="0" />
         <border key="SideNavigationPanel.border" type="empty" />
         <val key="SideNavigationPanel.margin" value="0.0,0.0,0.0,0.0" />
         <val key="SideNavigationPanel.padding" value="0.0,0.0,0.0,0.0" />
         <val key="SideNavigationPanel.transparency" value="255" />
-        <val key="SidemenuTop.bgImage" value="sidemenu-top.png" />
+        <val key="SidemenuTop.bgImage" value="2021_01_18_109951_1610963733._large.jpg" />
         <val key="SidemenuTop.bgType" value="33" />
         <val key="SidemenuTop.margin" value="0.0,0.0,0.0,0.0" />
         <val key="SidemenuTop.padUnit" value="2,2,2,2" />
         <val key="SidemenuTop.padding" value="20.0,2.0,2.0,2.0" />
         <val key="SkipButton.align" value="4" />
         <val key="SkipButton.bgColor" value="ffffff" />
-        <val key="SkipButton.fgColor" value="3c464f" />
+        <val key="SkipButton.fgColor" value="ff6633" />
         <font key="SkipButton.font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="3.5" />
         <val key="SkipButton.marUnit" value="2,2,2,2" />
         <val key="SkipButton.margin" value="3.0,5.0,6.0,6.0" />
@@ -201,7 +204,7 @@
         <val key="StatusBarSideMenu.margin" value="0.0,0.0,0.0,0.0" />
         <val key="StatusBarSideMenu.padding" value="0.0,0.0,0.0,0.0" />
         <val key="StatusBarSideMenu.transparency" value="0" />
-        <val key="SubTitle.fgColor" value="68d3ff" />
+        <val key="SubTitle.fgColor" value="ff6600" />
         <font key="SubTitle.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="2.0" />
         <val key="SubTitle.margin" value="0.0,0.0,0.0,0.0" />
         <val key="SubTitle.padUnit" value="2,2,2,2" />
@@ -267,32 +270,34 @@
         <val key="TodayTitle.padUnit" value="2,2,2,2" />
         <val key="TodayTitle.padding" value="5.0,3.0,2.0,1.0" />
         <val key="TodayTitle.transparency" value="0" />
-        <val key="Toolbar.bgImage" value="BackgroundRect.png" />
+        <val key="Toolbar.bgImage" value="2021_01_18_109951_1610963733._large.jpg" />
         <val key="Toolbar.bgType" value="33" />
         <border key="Toolbar.border" type="empty" />
         <val key="Toolbar.margin" value="0.0,0.0,0.0,0.0" />
         <val key="Toolbar.padding" value="0.0,0.0,0.0,0.0" />
         <val key="WalkthruBody.align" value="4" />
-        <val key="WalkthruBody.fgColor" value="ffffff" />
+        <val key="WalkthruBody.fgColor" value="0" />
         <font key="WalkthruBody.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="2.0" />
         <val key="WalkthruBody.margin" value="0.0,0.0,0.0,0.0" />
         <val key="WalkthruBody.padding" value="0.0,0.0,0.0,0.0" />
         <val key="WalkthruBody.transparency" value="0" />
         <val key="WalkthruTab1.bgColor" value="4e59ad" />
+        <val key="WalkthruTab1.bgImage" value="2021_01_18_109951_1610963733._large.jpg" />
+        <val key="WalkthruTab1.bgType" value="33" />
         <val key="WalkthruTab1.margin" value="0.0,0.0,0.0,0.0" />
         <val key="WalkthruTab1.padding" value="0.0,0.0,0.0,0.0" />
         <val key="WalkthruTab1.transparency" value="255" />
-        <val key="WalkthruTab2.bgColor" value="305ac4" />
+        <val key="WalkthruTab2.bgColor" value="666666" />
         <val key="WalkthruTab2.margin" value="0.0,0.0,0.0,0.0" />
         <val key="WalkthruTab2.padding" value="0.0,0.0,0.0,0.0" />
         <val key="WalkthruTab2.transparency" value="255" />
         <val key="WalkthruWhite.align" value="4" />
-        <val key="WalkthruWhite.fgColor" value="ffffff" />
+        <val key="WalkthruWhite.fgColor" value="0" />
         <font key="WalkthruWhite.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="4.0" />
         <val key="WalkthruWhite.margin" value="0.0,0.0,0.0,0.0" />
         <val key="WalkthruWhite.padding" value="0.0,0.0,0.0,0.0" />
         <val key="WalkthruWhite.transparency" value="0" />
-        <val key="WelcomeBlue.fgColor" value="67e1ff" />
+        <val key="WelcomeBlue.fgColor" value="ff6600" />
         <font key="WelcomeBlue.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="4.5" />
         <val key="WelcomeBlue.margin" value="0.0,0.0,0.0,0.0" />
         <val key="WelcomeBlue.padding" value="0.0,0.0,0.0,0.0" />

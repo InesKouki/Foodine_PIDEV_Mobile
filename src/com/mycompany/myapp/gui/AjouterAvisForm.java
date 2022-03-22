@@ -68,10 +68,11 @@ public class AjouterAvisForm extends SideMenuBaseFrontForm {
         Label note = new Label("Stars: ");
          add(note);
          Slider s = new Slider();
+        
          s.setMinValue(1);
-         s.setMaxValue(6);
+         s.setMaxValue(5);
          s.setEditable(true);
-         add(s);
+         
          s.addDataChangedListener(new DataChangedListener(){
              @Override
              public void dataChanged(int type,int index){
@@ -80,6 +81,7 @@ public class AjouterAvisForm extends SideMenuBaseFrontForm {
          });
         Description.getAllStyles().setMargin(LEFT, 0);
         Button btnValider = new Button("Envoyer");
+       
         btnValider.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -107,10 +109,9 @@ public class AjouterAvisForm extends SideMenuBaseFrontForm {
             }
         });
      
-        
+        add(s);
         add(UserName);
         add(Description);
-        
         add(btnValider);
         setupSideMenu(res);
  

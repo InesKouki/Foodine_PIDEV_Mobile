@@ -6,6 +6,7 @@
 package com.mycompany.myapp.gui;
 
 import com.codename1.components.FloatingActionButton;
+import com.codename1.components.SpanLabel;
 import com.codename1.ui.Button;
 import static com.codename1.ui.Component.BOTTOM;
 import static com.codename1.ui.Component.CENTER;
@@ -19,18 +20,17 @@ import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.util.Resources;
+import com.mycompany.myapp.entities.Review;
+import com.mycompany.myapp.services.ServiceReview;
 import com.mycompany.myapp.services.ServiceUser;
 import com.mycompany.myapp.services.SessionManager;
 
 /**
  *
- * @author ASUS
+ * @author Asus
  */
-//public class UpdateProfileForm extends SideMenuBaseForm {
-    
-
-public class UpdateProfileForm extends SideMenuBaseFrontForm{
-    public UpdateProfileForm(Resources res){
+public class updatePasswordForm extends SideMenuBaseFrontForm{
+    public updatePasswordForm(Resources res){
        super(BoxLayout.y());
         Toolbar tb = getToolbar();
         tb.setTitleCentered(false);
@@ -55,27 +55,21 @@ public class UpdateProfileForm extends SideMenuBaseFrontForm{
       
         //fab.getAllStyles().setMargin(BOTTOM, completedTasks.getPreferredH() - fab.getPreferredH() / 2);
         tb.setTitleComponent(fab.bindFabToContainer(titleCmp, CENTER, BOTTOM));
-        TextField nom = new TextField(SessionManager.getNom(), "Nom", 20, TextField.ANY) ;
-        TextField prenom = new TextField(SessionManager.getPrenom(), "Prenom", 20, TextField.ANY) ;
-        TextField email = new TextField(SessionManager.getEmail(), "Email", 20, TextField.EMAILADDR) ;
-        TextField telephone = new TextField("", "Telephone", 20, TextField.ANY) ;
-        TextField adresse = new TextField("", "Adresse", 20, TextField.ANY) ;
-        add(nom);
-         add(prenom);
-          add(email); 
-           add(telephone);
-           add(adresse);
-          
+        TextField password = new TextField("", "Password", 20, TextField.PASSWORD) ;
+        TextField confirm_password = new TextField("", "Confirm Password", 20, TextField.PASSWORD) ;
+        add(password);
+        add(confirm_password);
         Button btnAjouter = new Button("Confirmer");
         add(btnAjouter);
         btnAjouter.addActionListener((e)->{
-           if( adresse.getText().length()==0&&telephone.getText().length()==0){
+           if( password.getText().length()==0&&confirm_password.getText().length()==0){
            
            Dialog.show("Erreur","Veuillez remplir les champs","OK",null);
-       
+       }else if(!password.getText().equals(confirm_password.getText())){
+            Dialog.show("Erreur","Verifiez votre mot de passe","OK",null);
        }else{
-            ServiceUser.getInstance().updateprofile(SessionManager.getId(),nom,prenom,email,telephone,adresse);
-            Dialog.show("Success", "Compte modifié  avec sucess", "Ok", null);
+            ServiceUser.getInstance().updatePass(SessionManager.getId(),password);
+            Dialog.show("Success", "Mot de passe modifié avec succes", "Ok", null);
              new showProfileForm(res).show();
        }
         });

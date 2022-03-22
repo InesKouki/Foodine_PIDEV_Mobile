@@ -38,11 +38,11 @@ public abstract class SideMenuBaseBackForm extends Form {
     }
     
     public void setupSideMenu(Resources res) {
-        Image profilePic = res.getImage("user-picture.jpg");
+       Image profilePic = res.getImage("duke.png");
         Image mask = res.getImage("round-mask.png");
         mask = mask.scaledHeight(mask.getHeight() / 4 * 3);
         profilePic = profilePic.fill(mask.getWidth(), mask.getHeight());
-        Label profilePicLabel = new Label("  Jennifer Wilson", profilePic, "SideMenuTitle");
+        Label profilePicLabel = new Label("", profilePic, "");
         profilePicLabel.setMask(mask.createMask());
 
         Container sidemenuTop = BorderLayout.center(profilePicLabel);
@@ -52,7 +52,7 @@ public abstract class SideMenuBaseBackForm extends Form {
         getToolbar().addMaterialCommandToSideMenu("Reclamation", FontImage.MATERIAL_TRENDING_UP,  e -> new AfficherReclamationForm(res).show());
         getToolbar().addMaterialCommandToSideMenu("Avis", FontImage.MATERIAL_ACCESS_TIME,  e -> new AfficherAvisAdminForm(res).show());
         getToolbar().addMaterialCommandToSideMenu("Utilisateurs", FontImage.MATERIAL_DASHBOARD,  e -> new AfficherUtilisateurForm(res).show());
-        getToolbar().addMaterialCommandToSideMenu("Logout", FontImage.MATERIAL_EXIT_TO_APP,  e ->{
+        getToolbar().addMaterialCommandToSideMenu("Déconnexion", FontImage.MATERIAL_EXIT_TO_APP,  e ->{
             new LoginForm(res).show();
             SessionManager.pref.clearAll();
             Storage.getInstance().clearStorage();

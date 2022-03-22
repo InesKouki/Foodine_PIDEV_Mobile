@@ -30,11 +30,8 @@ public class ProfileForm extends SideMenuBaseFrontForm {
         super(BoxLayout.y());
         Toolbar tb = getToolbar();
         tb.setTitleCentered(false);
-        Image profilePic = res.getImage("user-picture.jpg");
-        Image mask = res.getImage("round-mask.png");
-        profilePic = profilePic.fill(mask.getWidth(), mask.getHeight());
-        Label profilePicLabel = new Label(profilePic, "ProfilePicTitle");
-        profilePicLabel.setMask(mask.createMask());
+        
+        
 
         Button menuButton = new Button("");
         menuButton.setUIID("Title");
@@ -53,14 +50,9 @@ public class ProfileForm extends SideMenuBaseFrontForm {
         completedTasks.setUIID("CompletedTasks");
 
         Container titleCmp = BoxLayout.encloseY(
-                        FlowLayout.encloseIn(menuButton),
-                        BorderLayout.centerAbsolute(
-                                BoxLayout.encloseY(
-                                    new Label("Jennifer Wilson", "Title"),
-                                    new Label("UI/UX Designer", "SubTitle")
-                                )
-                            ).add(BorderLayout.WEST, profilePicLabel),
-                        GridLayout.encloseIn(2, remainingTasks, completedTasks)
+                        FlowLayout.encloseIn(menuButton)
+                       
+                        
                 );
         
         FloatingActionButton fab = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD);
@@ -68,14 +60,11 @@ public class ProfileForm extends SideMenuBaseFrontForm {
         fab.getAllStyles().setMargin(BOTTOM, completedTasks.getPreferredH() - fab.getPreferredH() / 2);
         tb.setTitleComponent(fab.bindFabToContainer(titleCmp, CENTER, BOTTOM));
                         
-        add(new Label("Today", "TodayTitle"));
+        add(new Label("Bienvenu", "TodayTitle"));
         
-        FontImage arrowDown = FontImage.createMaterial(FontImage.MATERIAL_KEYBOARD_ARROW_DOWN, "Label", 3);
+       
         
-        addButtonBottom(arrowDown, "Finish landing page concept", 0xd997f1, true);
-        addButtonBottom(arrowDown, "Design app illustrations", 0x5ae29d, false);
-        addButtonBottom(arrowDown, "Javascript training ", 0x4dc2ff, false);
-        addButtonBottom(arrowDown, "Surprise Party for Matt", 0xffc06f, false);
+      
         setupSideMenu(res);
     }
     

@@ -38,22 +38,22 @@ public abstract class SideMenuBaseFrontForm extends Form {
     }
     
     public void setupSideMenu(Resources res) {
-        Image profilePic = res.getImage("user-picture.jpg");
+        Image profilePic = res.getImage("duke.png");
         Image mask = res.getImage("round-mask.png");
         mask = mask.scaledHeight(mask.getHeight() / 4 * 3);
         profilePic = profilePic.fill(mask.getWidth(), mask.getHeight());
-        Label profilePicLabel = new Label("  Jennifer Wilson", profilePic, "SideMenuTitle");
+        Label profilePicLabel = new Label("", profilePic, "");
         profilePicLabel.setMask(mask.createMask());
 
         Container sidemenuTop = BorderLayout.center(profilePicLabel);
         sidemenuTop.setUIID("SidemenuTop");
         
         getToolbar().addComponentToSideMenu(sidemenuTop);
-        getToolbar().addMaterialCommandToSideMenu("Home", FontImage.MATERIAL_DASHBOARD,  e -> new ProfileForm(res).show());
-        getToolbar().addMaterialCommandToSideMenu("Contact", FontImage.MATERIAL_TRENDING_UP,  e -> new AjouterReclamationForm(res).show());
-        getToolbar().addMaterialCommandToSideMenu("Review", FontImage.MATERIAL_ACCESS_TIME,  e -> new AfficherAvisForm(res).show());
-        //getToolbar().addMaterialCommandToSideMenu("Account Settings", FontImage.MATERIAL_SETTINGS,  e -> new UpdateProfileForm(res));
-        getToolbar().addMaterialCommandToSideMenu("Logout", FontImage.MATERIAL_EXIT_TO_APP,  e ->{
+        getToolbar().addMaterialCommandToSideMenu("Accueil", FontImage.MATERIAL_DASHBOARD,  e -> new ProfileForm(res).show());
+        getToolbar().addMaterialCommandToSideMenu("Reclamation", FontImage.MATERIAL_TRENDING_UP,  e -> new AjouterReclamationForm(res).show());
+        getToolbar().addMaterialCommandToSideMenu("Avis", FontImage.MATERIAL_ACCESS_TIME,  e -> new AfficherAvisForm(res).show());
+        getToolbar().addMaterialCommandToSideMenu("Account Settings", FontImage.MATERIAL_SETTINGS,  e -> new showProfileForm(res).show());
+        getToolbar().addMaterialCommandToSideMenu("Deconnexion", FontImage.MATERIAL_EXIT_TO_APP,  e ->{
             new LoginForm(res).show();
             SessionManager.pref.clearAll();
             Storage.getInstance().clearStorage();

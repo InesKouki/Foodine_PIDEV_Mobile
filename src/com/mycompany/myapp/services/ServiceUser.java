@@ -133,7 +133,20 @@ String url = Statics.BASE_URL + "signUpJson?nom="+nom.getText()+"&prenom="+preno
                 SessionManager.setUserName(user.get("Username").toString());
                 SessionManager.setEmail(user.get("email").toString());
                 SessionManager.setRole(user.get("Roles").toString());
-                System.out.println(SessionManager.getUserName()+SessionManager.getId()+SessionManager.getRole()+SessionManager.getRole().contains("ROLE_ADMIN"));
+                SessionManager.setNom(user.get("Nom").toString());
+                SessionManager.setPrenom(user.get("Prenom").toString());
+                  if(user.get("phone")!=null)
+                  {
+                      SessionManager.setTelephone(user.get("phone").toString());
+                
+                  }
+                   if(user.get("Address")!=null)
+                  {
+                     SessionManager.setAdresse(user.get("Address").toString());
+                  }
+                 
+                
+                System.out.println(SessionManager.getUserName()+SessionManager.getId()+SessionManager.getRole()+SessionManager.getRole().contains("ROLE_ADMIN")+SessionManager.getTelephone());
                 //photo 
                 
                 if(user.get("photo") != null)
@@ -189,7 +202,45 @@ String url = Statics.BASE_URL + "signUpJson?nom="+nom.getText()+"&prenom="+preno
    
 }
      
-     
+      public Boolean updatePass(int id,TextField password){
+         String url = Statics.BASE_URL+"updatePassJson?id="+id+"&password="+password.getText();
+       req.setUrl(url);
+       
+       
+       req.addResponseListener((e)->{
+                 byte[]data=(byte[])e.getMetaData();
+                 String responseData = new String(data);
+                 System.out.println("data ===>"+responseData);
+             });
+       
+         NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+   
+}
+      
+       public Boolean updateprofile(int id,TextField nom,TextField prenom,TextField email,TextField telephone,TextField adresse){
+         String url = Statics.BASE_URL+"editUserJson?id="+id+"&nom="+nom.getText()+"&prenom="+prenom.getText()+"&email="+email.getText()+"&telephone="+telephone.getText()+"&adresse="+adresse.getText();
+       req.setUrl(url);
+       
+       
+       req.addResponseListener((e)->{
+                 byte[]data=(byte[])e.getMetaData();
+                 String responseData = new String(data);
+                 System.out.println("data ===>"+responseData);
+             });
+       
+       
+               
+                SessionManager.setEmail(email.getText());
+                SessionManager.setTelephone(telephone.getText());
+                SessionManager.setAdresse(adresse.getText());
+                SessionManager.setNom(nom.getText());
+                SessionManager.setPrenom(prenom.getText());
+       
+         NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+   
+}
      
      
      public ArrayList<User> getAllUsers(){
