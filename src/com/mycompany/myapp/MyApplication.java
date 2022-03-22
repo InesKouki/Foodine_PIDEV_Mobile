@@ -58,7 +58,7 @@ public class MyApplication {
             current.show();
             return;
         }
-      new AfficherReclamationForm(theme).show();
+      new LoginForm(theme).show();
     }
 
     public void stop() {

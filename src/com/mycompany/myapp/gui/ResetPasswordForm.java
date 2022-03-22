@@ -6,22 +6,28 @@
 package com.mycompany.myapp.gui;
 
 import com.codename1.ui.Button;
+import com.codename1.ui.Command;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
+import com.codename1.ui.events.ActionEvent;
+import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.util.Resources;
+import com.mycompany.myapp.entities.User;
+import com.mycompany.myapp.services.ServiceUser;
 
 /**
  *
  * @author Asus
  */
 public class ResetPasswordForm extends Form {
-  public ResetPasswordForm(Resources theme) {
+  public ResetPasswordForm(Resources theme,User r) {
        super(new BorderLayout(BorderLayout.CENTER_BEHAVIOR_CENTER_ABSOLUTE));
         setUIID("LoginForm");
         Container welcome = FlowLayout.encloseCenter(
@@ -39,9 +45,21 @@ public class ResetPasswordForm extends Form {
          sendButton.setUIID("CreateNewAccountButton");
          RetourButton.setUIID("CreateNewAccountButton");
           RetourButton.addActionListener(e -> {
-           
-            
              new LoginForm(theme).show();
+        });
+          
+          
+         sendButton.addActionListener((e)->{
+           if(code.getText().length()==0 || password.getText().length()==0&&confirm_password.getText().length()==0){
+           
+           Dialog.show("Erreur","Veuillez remplir les champs","OK",null);
+       }else if(!password.getText().equals(confirm_password.getText())){
+            Dialog.show("Erreur","Verifiez votre mot de passe","OK",null);
+       }else{
+            ServiceUser.getInstance().resetPass(code,password);
+            Dialog.show("Success", "Mot de passe modifié avec sucess", "Ok", null);
+             new LoginForm(theme).show();
+       }
         });
           
           Label spaceLabel;

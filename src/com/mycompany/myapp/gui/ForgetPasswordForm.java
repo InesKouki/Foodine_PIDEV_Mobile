@@ -16,6 +16,7 @@ import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.util.Resources;
+import com.mycompany.myapp.entities.User;
 import com.mycompany.myapp.services.ServiceUser;
 
 /**
@@ -23,7 +24,7 @@ import com.mycompany.myapp.services.ServiceUser;
  * @author Asus
  */
 public class ForgetPasswordForm extends Form {
-
+User u;
     ForgetPasswordForm(Resources theme) {
        super(new BorderLayout(BorderLayout.CENTER_BEHAVIOR_CENTER_ABSOLUTE));
         setUIID("LoginForm");
@@ -47,7 +48,7 @@ public class ForgetPasswordForm extends Form {
           
           sendButton.addActionListener(e -> {
             ServiceUser.getInstance().ForgetPass(email,theme);
-             new ResetPasswordForm(theme).show();
+             new ResetPasswordForm(theme,u).show();
         });
           
           Label spaceLabel;

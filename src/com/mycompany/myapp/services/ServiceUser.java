@@ -128,19 +128,31 @@ String url = Statics.BASE_URL + "signUpJson?nom="+nom.getText()+"&prenom="+preno
             
             JSONParser j = new JSONParser();
              json = new String(req.getResponseData()) + "";
-            try {
-                System.out.println("data =="+json);
-                Map<String,Object> password = j.parseJSON(new CharArrayReader(json.toCharArray()));
-      
-            }catch(Exception ex) {
-                ex.printStackTrace();
-            }
-        
+             System.out.println("data =="+json);
+     
         });
         NetworkManager.getInstance().addToQueueAndWait(req);
         return json;
    
 }
+        public Boolean resetPass(TextField code,TextField password){
+         String url = Statics.BASE_URL+"resetPasswordJSON/"+code.getText()+"/"+password.getText();
+       req.setUrl(url);
+       
+       
+       req.addResponseListener((e)->{
+                 byte[]data=(byte[])e.getMetaData();
+                 String responseData = new String(data);
+                 System.out.println("data ===>"+responseData);
+             });
+       
+         NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+   
+}
+     
+     
+     
      
      public ArrayList<User> getAllUsers(){
         req = new ConnectionRequest();
