@@ -60,9 +60,10 @@ public class MyApplication {
             return;
         }
         if(SessionManager.getUserName()==null)
-      new LoginForm(theme).show();
+              new LoginForm(theme).show();
         else
-              new ProfileForm(theme).show();
+            new ProfileForm(theme).show();
+   
     }
 
     public void stop() {

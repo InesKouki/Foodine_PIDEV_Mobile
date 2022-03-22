@@ -16,6 +16,7 @@ import com.codename1.ui.TextField;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.util.Resources;
 import com.mycompany.myapp.entities.User;
+import com.mycompany.myapp.gui.AfficherUtilisateurForm;
 import com.mycompany.myapp.gui.ProfileForm;
 import com.mycompany.myapp.gui.ResetPasswordForm;
 import com.mycompany.myapp.utils.Statics;
@@ -131,14 +132,17 @@ String url = Statics.BASE_URL + "signUpJson?nom="+nom.getText()+"&prenom="+preno
                 SessionManager.setPassowrd(user.get("Password").toString());
                 SessionManager.setUserName(user.get("Username").toString());
                 SessionManager.setEmail(user.get("email").toString());
-                System.out.println(SessionManager.getUserName()+SessionManager.getId());
+                SessionManager.setRole(user.get("Roles").toString());
+                System.out.println(SessionManager.getUserName()+SessionManager.getId()+SessionManager.getRole()+SessionManager.getRole().contains("ROLE_ADMIN"));
                 //photo 
                 
                 if(user.get("photo") != null)
                     SessionManager.setPhoto(user.get("photo").toString());
                 
-                  
-                    new ProfileForm(res).show();
+                  if (SessionManager.getRole().contains("ROLE_ADMIN"))  
+                    new AfficherUtilisateurForm(res).show();
+                  else
+                       new ProfileForm(res).show();
                 }
                     }
             
