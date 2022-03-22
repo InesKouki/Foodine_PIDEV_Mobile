@@ -27,7 +27,7 @@ import com.mycompany.myapp.services.ServiceReview;
  *
  * @author Asus
  */
-public class AfficherAvisAdminForm extends SideMenuBaseForm {
+public class AfficherAvisAdminForm extends SideMenuBaseBackForm {
  public AfficherAvisAdminForm(Resources res){
        super(BoxLayout.y());
         Toolbar tb = getToolbar();

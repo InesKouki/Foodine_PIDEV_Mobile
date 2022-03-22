@@ -39,7 +39,7 @@ import java.util.Date;
  *
  * @author ASUS
  */
-public class AjouterReclamationForm extends SideMenuBaseForm {
+public class AjouterReclamationForm extends SideMenuBaseFrontForm {
 
     
     public AjouterReclamationForm(Resources res){
@@ -116,7 +116,7 @@ public class AjouterReclamationForm extends SideMenuBaseForm {
 
     @Override
     protected void showOtherForm(Resources res) {
-        new StatsForm(res).show();
+      new ProfileForm(res).show();
     }
 
     

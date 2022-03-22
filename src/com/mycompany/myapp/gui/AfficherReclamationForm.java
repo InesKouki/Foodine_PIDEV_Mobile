@@ -35,7 +35,7 @@ import java.util.Date;
  *
  * @author ASUS
  */
-public class AfficherReclamationForm extends SideMenuBaseForm{
+public class AfficherReclamationForm extends SideMenuBaseBackForm{
     
    public AfficherReclamationForm(Resources res){
        super(BoxLayout.y());

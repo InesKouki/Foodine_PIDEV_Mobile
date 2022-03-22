@@ -33,7 +33,7 @@ import java.util.Date;
  *
  * @author Asus
  */
-public class ReponseForm extends SideMenuBaseForm{
+public class ReponseForm extends SideMenuBaseBackForm{
 
     ReponseForm(Resources res, Reclamation r) {
       super(BoxLayout.y());

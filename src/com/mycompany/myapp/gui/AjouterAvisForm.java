@@ -35,7 +35,7 @@ import java.util.Date;
  *
  * @author ASUS
  */
-public class AjouterAvisForm extends SideMenuBaseForm {
+public class AjouterAvisForm extends SideMenuBaseFrontForm {
  public AjouterAvisForm(Resources res){
       
         super(BoxLayout.y());
@@ -121,7 +121,7 @@ public class AjouterAvisForm extends SideMenuBaseForm {
 
     @Override
     protected void showOtherForm(Resources res) {
-        new StatsForm(res).show();
+       new ProfileForm(res).show();
     }
 
     

@@ -20,20 +20,20 @@ import com.mycompany.myapp.services.SessionManager;
  *
  * @author ASUS
  */
-public abstract class SideMenuBaseForm extends Form {
+public abstract class SideMenuBaseFrontForm extends Form {
 
-    public SideMenuBaseForm(String title, Layout contentPaneLayout) {
+    public SideMenuBaseFrontForm(String title, Layout contentPaneLayout) {
         super(title, contentPaneLayout);
     }
 
-    public SideMenuBaseForm(String title) {
+    public SideMenuBaseFrontForm(String title) {
         super(title);
     }
 
-    public SideMenuBaseForm() {
+    public SideMenuBaseFrontForm() {
     }
 
-    public SideMenuBaseForm(Layout contentPaneLayout) {
+    public SideMenuBaseFrontForm(Layout contentPaneLayout) {
         super(contentPaneLayout);
     }
     

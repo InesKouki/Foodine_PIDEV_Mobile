@@ -25,7 +25,7 @@ import com.codename1.ui.util.Resources;
  *
  * @author ASUS
  */
-public class ProfileForm extends SideMenuBaseForm {
+public class ProfileForm extends SideMenuBaseFrontForm {
     public ProfileForm(Resources res) {
         super(BoxLayout.y());
         Toolbar tb = getToolbar();
@@ -107,6 +107,6 @@ public class ProfileForm extends SideMenuBaseForm {
 
     @Override
     protected void showOtherForm(Resources res) {
-        new StatsForm(res).show();
+        new ProfileForm(res).show();
     }
 }

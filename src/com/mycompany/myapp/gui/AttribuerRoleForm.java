@@ -37,7 +37,7 @@ import java.util.Date;
  *
  * @author Asus
  */
-public class AttribuerRoleForm extends SideMenuBaseForm {
+public class AttribuerRoleForm extends SideMenuBaseBackForm {
 
      public AttribuerRoleForm(Resources res,User t) {
    

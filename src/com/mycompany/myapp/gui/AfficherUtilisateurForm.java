@@ -29,7 +29,7 @@ import static java.util.concurrent.ThreadLocalRandom.current;
  *
  * @author Asus
  */
-public class AfficherUtilisateurForm extends SideMenuBaseForm{
+public class AfficherUtilisateurForm extends SideMenuBaseBackForm{
  Form current;
      public AfficherUtilisateurForm(Resources res){
          
