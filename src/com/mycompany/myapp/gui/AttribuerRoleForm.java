@@ -6,6 +6,7 @@
 package com.mycompany.myapp.gui;
 
 import com.codename1.components.FloatingActionButton;
+import com.codename1.components.SpanLabel;
 import com.codename1.l10n.SimpleDateFormat;
 import com.codename1.ui.Button;
 import com.codename1.ui.ComboBox;
@@ -37,16 +38,14 @@ import java.util.Date;
  * @author Asus
  */
 public class AttribuerRoleForm extends SideMenuBaseForm {
-  
+
+     public AttribuerRoleForm(Resources res,User t) {
    
-    Resources res;
+        super(BoxLayout.y());
+        Toolbar tb = getToolbar();
+        tb.setTitleCentered(false);
         
-   
-     public AttribuerRoleForm(Form previous,User t) {
-         
-         super(BoxLayout.y());
-         Toolbar tb = getToolbar();
-         tb.setTitleCentered(false);
+
         Button menuButton = new Button("");
         menuButton.setUIID("Title");
         FontImage.setMaterialIcon(menuButton, FontImage.MATERIAL_MENU);
@@ -66,8 +65,9 @@ public class AttribuerRoleForm extends SideMenuBaseForm {
       
         //fab.getAllStyles().setMargin(BOTTOM, completedTasks.getPreferredH() - fab.getPreferredH() / 2);
         tb.setTitleComponent(fab.bindFabToContainer(titleCmp, CENTER, BOTTOM));
-        
-        setLayout(BoxLayout.y());
+       
+       
+        setupSideMenu(res);
         
         
         ComboBox<String> Type = new ComboBox<>();
@@ -77,16 +77,17 @@ public class AttribuerRoleForm extends SideMenuBaseForm {
         Button btnValider = new Button("Valider");
         
        String role = Type.getSelectedItem();
-       
-       
-        
-         btnValider.addActionListener(new ActionListener() {
+       btnValider.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-
-                        t.setRoles(Type.getSelectedItem());
-                        if( ServiceUser.getInstance().roleUser(t))      
-                        Dialog.show("Success","Role attribué avec succès",new Command("OK"));
+                           
+                                t.setRoles(Type.getSelectedItem());
+                        if( ServiceUser.getInstance().roleUser(t))    
+               {
+                   Dialog.show("Success","Role attribué avec succès",new Command("OK"));
+                        new AfficherUtilisateurForm(res).show();
+               }
+                        
                         else
                         {
                            Dialog.show("ERROR", "Server error", new Command("OK"));  
@@ -94,19 +95,8 @@ public class AttribuerRoleForm extends SideMenuBaseForm {
          
              }
         }); 
-        addAll(Type,btnValider);
-     
-                
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+       
+       addAll(Type,btnValider);
      }
 
     @Override

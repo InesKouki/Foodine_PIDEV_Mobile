@@ -13,7 +13,6 @@ import static com.codename1.ui.Component.CENTER;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.FontImage;
-import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.layouts.BorderLayout;
@@ -21,18 +20,15 @@ import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.plaf.Border;
 import com.codename1.ui.util.Resources;
-import com.mycompany.myapp.entities.User;
-import com.mycompany.myapp.services.ServiceUser;
-import static java.util.concurrent.ThreadLocalRandom.current;
+import com.mycompany.myapp.entities.Review;
+import com.mycompany.myapp.services.ServiceReview;
 
 /**
  *
  * @author Asus
  */
-public class AfficherUtilisateurForm extends SideMenuBaseForm{
- Form current;
-     public AfficherUtilisateurForm(Resources res){
-         
+public class AfficherAvisAdminForm extends SideMenuBaseForm {
+ public AfficherAvisAdminForm(Resources res){
        super(BoxLayout.y());
         Toolbar tb = getToolbar();
         tb.setTitleCentered(false);
@@ -46,7 +42,7 @@ public class AfficherUtilisateurForm extends SideMenuBaseForm{
                         FlowLayout.encloseIn(menuButton),
                         BorderLayout.centerAbsolute(
                                 BoxLayout.encloseY(
-                                    new Label("Listes des Utilisateurs", "Title"),
+                                    new Label("Listes des Avis", "Title"),
                                     new Label("", "SubTitle")
                                 )
                             )
@@ -59,94 +55,47 @@ public class AfficherUtilisateurForm extends SideMenuBaseForm{
         tb.setTitleComponent(fab.bindFabToContainer(titleCmp, CENTER, BOTTOM));
        
         SpanLabel sp = new SpanLabel();
-        for (User r : ServiceUser.getInstance().getAllUsers()) {
+        for (Review r : ServiceReview.getInstance().getAllReviews()) {
             add(addItem(r,res));
         }
         add(sp);
+       
         setupSideMenu(res);
  
     }
    
     private void refresh(Resources res) {
-        new AfficherUtilisateurForm(res).show();
+        new AfficherAvisAdminForm(res).show();
     }
    
-    private Container addItem(User r, Resources res) {
-        String etat=Integer.toString(r.getEtat());
+    private Container addItem(Review r, Resources res) {
+       String stars=Integer.toString(r.getStars());
         Container cnt1 = new Container(BoxLayout.y());
-        SpanLabel L1 = new SpanLabel(r.getNom());
-        SpanLabel L2 = new SpanLabel(r.getPrenom());
-        SpanLabel L3 = new SpanLabel(r.getUsername());
-        SpanLabel L4 = new SpanLabel(r.getEmail());
-        SpanLabel L5 = new SpanLabel(etat);
-       
+        SpanLabel L1 = new SpanLabel(r.getUser_name());
         //SpanLabel L2 = new SpanLabel(r.getDate());
-      
-        Button btnbloquer = new Button("Bloquer");
-        Button btndebloquer = new Button("Débloquer");
+        SpanLabel L3 = new SpanLabel(r.getDescription());
+        SpanLabel L4 = new SpanLabel (stars);
         Button btnsupprimer = new Button("Supprimer");
-        Button RoleButton = new Button("Attribuer Role");
         cnt1.add(L1);
-        cnt1.add(L2);
+        //cnt1.add(L2);
         cnt1.add(L3);
         cnt1.add(L4);
-        cnt1.add(L5);
         Container cnt3 = new Container(BoxLayout.x());
-        if (r.getEtat()==1) {
-            cnt3.add(btnbloquer);
-        }else if(r.getEtat()==0){
-             cnt3.add(btndebloquer);
-        }
-        cnt3.add(btnsupprimer);
-        cnt3.add(RoleButton);
         cnt1.add(cnt3);
         cnt1.getStyle().setBorder(Border.createLineBorder(0));
         Container cnt2 = new Container(BoxLayout.y());
         cnt2.add(cnt1);
-        
-        RoleButton.addActionListener((e) -> {
-           new AttribuerRoleForm(res, r).show();
-        }
-        );
-  btnsupprimer.addPointerPressedListener(l->{
-           Dialog dig = new Dialog("Suppresion");
-           if(dig.show("Supprimer","Voulez-vous supprimer cette utilisateur","Annuler","Oui")){
+       cnt3.add(btnsupprimer);
+       btnsupprimer.addPointerPressedListener(l->{
+           Dialog dig = new Dialog("Suppression");
+           if(dig.show("Suppression","Voulez-vous supprimer l'avis?","Annuler","Oui")){
                dig.dispose();
            }else {
                dig.dispose();
-               if (ServiceUser.getInstance().deleteUser(r.getId())) {
+               if (ServiceReview.getInstance().deleteReview(r.getId())) {
                 refresh(res);
             } else {
-                System.out.println("erreur");
-            }
-           }
-       });
-      
-        
-       btnbloquer.addPointerPressedListener(l->{
-           Dialog dig = new Dialog("Bloquer");
-           if(dig.show("Bloquer","Voulez-vous bloquer cette utilisateur","Annuler","Oui")){
-               dig.dispose();
-           }else {
-               dig.dispose();
-               if (ServiceUser.getInstance().bloquerUser(r.getId())) {
-                refresh(res);
-            } else {
-                System.out.println("erreur");
-            }
-           }
-       });
-       
-       btndebloquer.addPointerPressedListener(l->{
-           Dialog dig = new Dialog("Bloquer");
-           if(dig.show("Débloquer","Voulez-vous débloquer cette utilisateur","Annuler","Oui")){
-               dig.dispose();
-           }else {
-               dig.dispose();
-               if (ServiceUser.getInstance().debloquerUser(r.getId())) {
-                refresh(res);
-            } else {
-                System.out.println("erreur");
+                System.out.println("erreur dans la suppression");
             }
            }
        });
@@ -159,5 +108,3 @@ public class AfficherUtilisateurForm extends SideMenuBaseForm{
     }
     
 }
-    
-

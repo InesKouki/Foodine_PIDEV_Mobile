@@ -13,6 +13,7 @@ import com.codename1.ui.Toolbar;
 import java.io.IOException;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.io.NetworkEvent;
+import com.mycompany.myapp.gui.AfficherAvisAdminForm;
 import com.mycompany.myapp.gui.AfficherAvisForm;
 import com.mycompany.myapp.gui.AfficherReclamationForm;
 import com.mycompany.myapp.gui.AfficherUtilisateurForm;
@@ -57,7 +58,7 @@ public class MyApplication {
             current.show();
             return;
         }
-      new AfficherUtilisateurForm(theme).show();
+      new AfficherReclamationForm(theme).show();
     }
 
     public void stop() {

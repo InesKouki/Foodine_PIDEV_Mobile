@@ -191,7 +191,7 @@ String url = Statics.BASE_URL + "signUpJson?nom="+nom.getText()+"&prenom="+preno
     }
    
     public boolean deleteUser(int id) {
-      String url = Statics.BASE_URL + "deleteUserJson/" + id;
+      String url = Statics.BASE_URL + "deleteUserJson?id=" + id;
         req.setUrl(url);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
             @Override
@@ -206,7 +206,7 @@ String url = Statics.BASE_URL + "signUpJson?nom="+nom.getText()+"&prenom="+preno
     }
     
     public boolean roleUser(User t) { 
-        String url = Statics.BASE_URL + "roleJson/"+t.getId()+"?Role="+t.getRoles()+"";
+        String url = Statics.BASE_URL + "roleJson?id="+t.getId()+"&Role="+t.getRoles();
 
         req.setUrl(url);
         req.addResponseListener(new ActionListener<NetworkEvent>() {
