@@ -92,7 +92,7 @@ public class AjouterReclamationForm extends SideMenuBaseFrontForm {
                         if( ServiceReclamation.getInstance().addReclamation(r))
                         {
                            Dialog.show("Success","Connection accepted",new Command("OK"));
-                           new AfficherReclamationForm(res).show();
+                           new ProfileForm(res).show();
                         }else
                             Dialog.show("ERROR", "Server error", new Command("OK"));
                         

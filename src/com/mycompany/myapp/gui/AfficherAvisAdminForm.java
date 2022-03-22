@@ -71,15 +71,14 @@ public class AfficherAvisAdminForm extends SideMenuBaseBackForm {
     private Container addItem(Review r, Resources res) {
        String stars=Integer.toString(r.getStars());
         Container cnt1 = new Container(BoxLayout.y());
-        SpanLabel L1 = new SpanLabel(r.getUser_name());
+         Container box1 = BoxLayout.encloseX(new Label("Nom Utilisateur: "), new Label(r.getUser_name()));
         //SpanLabel L2 = new SpanLabel(r.getDate());
-        SpanLabel L3 = new SpanLabel(r.getDescription());
-        SpanLabel L4 = new SpanLabel (stars);
+       Container box2 = BoxLayout.encloseX(new Label("Description: "), new Label(r.getDescription()));
+       Container box3 = BoxLayout.encloseX(new Label("Note: "), new Label(stars), new Label(" Etoiles"));
         Button btnsupprimer = new Button("Supprimer");
-        cnt1.add(L1);
-        //cnt1.add(L2);
-        cnt1.add(L3);
-        cnt1.add(L4);
+        cnt1.add(box1);
+        cnt1.add(box2);
+        cnt1.add(box3);
         Container cnt3 = new Container(BoxLayout.x());
         cnt1.add(cnt3);
         cnt1.getStyle().setBorder(Border.createLineBorder(0));

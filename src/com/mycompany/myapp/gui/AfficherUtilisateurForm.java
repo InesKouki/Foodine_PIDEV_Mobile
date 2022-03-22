@@ -23,6 +23,7 @@ import com.codename1.ui.plaf.Border;
 import com.codename1.ui.util.Resources;
 import com.mycompany.myapp.entities.User;
 import com.mycompany.myapp.services.ServiceUser;
+import com.mycompany.myapp.services.SessionManager;
 import static java.util.concurrent.ThreadLocalRandom.current;
 
 /**
@@ -73,12 +74,15 @@ public class AfficherUtilisateurForm extends SideMenuBaseBackForm{
    
     private Container addItem(User r, Resources res) {
         String etat=Integer.toString(r.getEtat());
+       
+        
         Container cnt1 = new Container(BoxLayout.y());
-        SpanLabel L1 = new SpanLabel(r.getNom());
-        SpanLabel L2 = new SpanLabel(r.getPrenom());
-        SpanLabel L3 = new SpanLabel(r.getUsername());
-        SpanLabel L4 = new SpanLabel(r.getEmail());
-        SpanLabel L5 = new SpanLabel(etat);
+        Container box1 = BoxLayout.encloseX(new Label("Nom: "), new Label(r.getNom()));
+        Container box2 = BoxLayout.encloseX(new Label("Prenom: "), new Label(r.getPrenom()));
+        Container box3 = BoxLayout.encloseX(new Label("Username: "), new Label(r.getUsername()));
+        Container box4 = BoxLayout.encloseX(new Label("Email: "), new Label(r.getEmail()));
+        Container box5 = BoxLayout.encloseX(new Label("Etat: "), new Label(etat));
+        Container box6 = BoxLayout.encloseX(new Label("Roles: "), new Label(r.getRoles()));
        
         //SpanLabel L2 = new SpanLabel(r.getDate());
       
@@ -86,11 +90,12 @@ public class AfficherUtilisateurForm extends SideMenuBaseBackForm{
         Button btndebloquer = new Button("Débloquer");
         Button btnsupprimer = new Button("Supprimer");
         Button RoleButton = new Button("Attribuer Role");
-        cnt1.add(L1);
-        cnt1.add(L2);
-        cnt1.add(L3);
-        cnt1.add(L4);
-        cnt1.add(L5);
+        cnt1.add(box1);
+        cnt1.add(box2);
+        cnt1.add(box3);
+        cnt1.add(box4);
+        cnt1.add(box5);
+         cnt1.add(box6);
         Container cnt3 = new Container(BoxLayout.x());
         if (r.getEtat()==1) {
             cnt3.add(btnbloquer);

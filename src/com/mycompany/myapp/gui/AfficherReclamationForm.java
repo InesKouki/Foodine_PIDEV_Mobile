@@ -77,16 +77,16 @@ public class AfficherReclamationForm extends SideMenuBaseBackForm{
     }
    
     private Container addItem(Reclamation r, Resources res) {
-       
+          String etat=Integer.toString(r.getEtat());
         Container cnt1 = new Container(BoxLayout.y());
-        SpanLabel L1 = new SpanLabel(r.getType());
-        //SpanLabel L2 = new SpanLabel(r.getDate());
-        SpanLabel L3 = new SpanLabel(r.getDescription());
+      Container box1 = BoxLayout.encloseX(new Label("Type de la reclamation: "), new Label(r.getType()));
+       Container box2 = BoxLayout.encloseX(new Label("Description: "), new Label(r.getDescription()));
+       Container box3 = BoxLayout.encloseX(new Label("Etat: "), new Label(etat));
         Button btnsupprimer = new Button("Supprimer");
-         Button btnrepondre = new Button("Repondre");
-        cnt1.add(L1);
-        //cnt1.add(L2);
-        cnt1.add(L3);
+        Button btnrepondre = new Button("Repondre");
+        cnt1.add(box1);
+        cnt1.add(box2);
+        cnt1.add(box3);
         Container cnt3 = new Container(BoxLayout.x());
         if (r.getEtat()==1) {
             cnt3.add(btnsupprimer);
