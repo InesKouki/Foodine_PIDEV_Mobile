@@ -4,9 +4,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Asus/Desktop/Foodine_PIDEV_Mobile/src/com/mycompany/myapp/MyApplication.java</file>
-            <file>file:/C:/Users/Asus/Desktop/Foodine_PIDEV_Mobile/src/com/mycompany/myapp/gui/ProfileForm.java</file>
-            <file>file:/C:/Users/Asus/Desktop/Foodine_PIDEV_Mobile/src/com/mycompany/myapp/services/ServiceUser.java</file>
+            <file>file:/C:/Users/Asus/Desktop/Foodine_PIDEV_Mobile/src/com/mycompany/myapp/gui/AjouterReclamationForm.java</file>
+            <file>file:/C:/Users/Asus/Desktop/Foodine_PIDEV_Mobile/src/com/mycompany/myapp/gui/SignUpForm.java</file>
+            <file>file:/C:/Users/Asus/Desktop/Foodine_PIDEV_Mobile/src/com/mycompany/myapp/gui/AfficherUtilisateurForm.java</file>
         </group>
     </open-files>
 </project-private>

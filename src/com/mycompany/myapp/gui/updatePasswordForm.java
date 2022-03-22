@@ -54,7 +54,7 @@ public class updatePasswordForm extends SideMenuBaseFrontForm{
         FloatingActionButton fab = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD);
       
         //fab.getAllStyles().setMargin(BOTTOM, completedTasks.getPreferredH() - fab.getPreferredH() / 2);
-        tb.setTitleComponent(fab.bindFabToContainer(titleCmp, CENTER, BOTTOM));
+        tb.setTitleComponent(fab.bindFabToContainer(titleCmp, RIGHT, TOP));
         TextField password = new TextField("", "Password", 20, TextField.PASSWORD) ;
         TextField confirm_password = new TextField("", "Confirm Password", 20, TextField.PASSWORD) ;
         add(password);

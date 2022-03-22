@@ -8,6 +8,7 @@ package com.mycompany.myapp.gui;
 import com.codename1.components.FloatingActionButton;
 import com.codename1.components.SpanLabel;
 import com.codename1.ui.Button;
+import com.codename1.ui.ComboBox;
 import static com.codename1.ui.Component.BOTTOM;
 import static com.codename1.ui.Component.CENTER;
 import com.codename1.ui.Container;
@@ -57,8 +58,11 @@ public class AfficherUtilisateurForm extends SideMenuBaseBackForm{
         FloatingActionButton fab = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD);
       
         //fab.getAllStyles().setMargin(BOTTOM, completedTasks.getPreferredH() - fab.getPreferredH() / 2);
-        tb.setTitleComponent(fab.bindFabToContainer(titleCmp, CENTER, BOTTOM));
+        tb.setTitleComponent(fab.bindFabToContainer(titleCmp, RIGHT, TOP));
+       ComboBox<String> Type = new ComboBox<>();
        
+       
+        
         SpanLabel sp = new SpanLabel();
         for (User r : ServiceUser.getInstance().getAllUsers()) {
             add(addItem(r,res));

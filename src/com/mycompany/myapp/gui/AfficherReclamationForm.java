@@ -61,7 +61,7 @@ public class AfficherReclamationForm extends SideMenuBaseBackForm{
         FloatingActionButton fab = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD);
       
         //fab.getAllStyles().setMargin(BOTTOM, completedTasks.getPreferredH() - fab.getPreferredH() / 2);
-        tb.setTitleComponent(fab.bindFabToContainer(titleCmp, CENTER, BOTTOM));
+        tb.setTitleComponent(fab.bindFabToContainer(titleCmp, RIGHT, TOP));
        
         SpanLabel sp = new SpanLabel();
         for (Reclamation r : ServiceReclamation.getInstance().getAllReclamations()) {

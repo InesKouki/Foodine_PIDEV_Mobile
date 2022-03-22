@@ -54,7 +54,7 @@ public class UpdateProfileForm extends SideMenuBaseFrontForm{
         FloatingActionButton fab = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD);
       
         //fab.getAllStyles().setMargin(BOTTOM, completedTasks.getPreferredH() - fab.getPreferredH() / 2);
-        tb.setTitleComponent(fab.bindFabToContainer(titleCmp, CENTER, BOTTOM));
+       tb.setTitleComponent(fab.bindFabToContainer(titleCmp, RIGHT, TOP));
         TextField nom = new TextField(SessionManager.getNom(), "Nom", 20, TextField.ANY) ;
         TextField prenom = new TextField(SessionManager.getPrenom(), "Prenom", 20, TextField.ANY) ;
         TextField email = new TextField(SessionManager.getEmail(), "Email", 20, TextField.EMAILADDR) ;

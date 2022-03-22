@@ -62,7 +62,7 @@ public class MyApplication {
         if(SessionManager.getUserName()==null)
               new LoginForm(theme).show();
         else
-            new ProfileForm(theme).show();
+            new AfficherUtilisateurForm(theme).show();
    
     }
 

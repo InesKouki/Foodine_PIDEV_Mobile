@@ -59,7 +59,7 @@ public class ReponseForm extends SideMenuBaseBackForm{
         FloatingActionButton fab = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD);
       
         //fab.getAllStyles().setMargin(BOTTOM, completedTasks.getPreferredH() - fab.getPreferredH() / 2);
-        tb.setTitleComponent(fab.bindFabToContainer(titleCmp, CENTER, BOTTOM));
+        tb.setTitleComponent(fab.bindFabToContainer(titleCmp, RIGHT, TOP));
       TextField Description = new TextField("", "Description", 50, TextField.ANY) ;
         Description.getAllStyles().setMargin(LEFT, 0);
         Button btnValider = new Button("Envoyer");

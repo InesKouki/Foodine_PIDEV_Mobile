@@ -52,7 +52,7 @@ public class showProfileForm extends SideMenuBaseFrontForm {
         FloatingActionButton fab = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD);
         fab.getAllStyles().setMarginUnit(Style.UNIT_TYPE_PIXELS);
         //fab.getAllStyles().setMargin(BOTTOM, completedTasks.getPreferredH() - fab.getPreferredH() / 2);
-        tb.setTitleComponent(fab.bindFabToContainer(titleCmp, CENTER, BOTTOM));
+        tb.setTitleComponent(fab.bindFabToContainer(titleCmp, RIGHT, TOP));
        Container box1 = BoxLayout.encloseX(new Label("Nom: "), new Label(SessionManager.getNom()));
        add(box1);
        Container box2 = BoxLayout.encloseX(new Label("Prenom: "), new Label(SessionManager.getPrenom()));
