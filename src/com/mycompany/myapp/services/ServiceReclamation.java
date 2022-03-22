@@ -13,6 +13,7 @@ import com.codename1.io.NetworkManager;
 import com.codename1.l10n.SimpleDateFormat;
 import com.codename1.ui.events.ActionListener;
 import com.mycompany.myapp.entities.Reclamation;
+import com.mycompany.myapp.entities.Reponse;
 import com.mycompany.myapp.utils.Statics;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -151,7 +152,20 @@ public class ServiceReclamation {
     }
      
      
-     
+      public boolean addReponse(Reponse t) { 
+        String url = Statics.BASE_URL +"reponseJson?id_rec="+t.getId_rec()+"&message="+t.getMessage();
+
+        req.setUrl(url);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                resultOK = req.getResponseCode() == 200; //Code HTTP 200 OK
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return resultOK;
+    }
        
      
 }

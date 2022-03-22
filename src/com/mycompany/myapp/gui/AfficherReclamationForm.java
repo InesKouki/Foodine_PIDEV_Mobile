@@ -83,7 +83,7 @@ public class AfficherReclamationForm extends SideMenuBaseForm{
         //SpanLabel L2 = new SpanLabel(r.getDate());
         SpanLabel L3 = new SpanLabel(r.getDescription());
         Button btnsupprimer = new Button("Supprimer");
-         Button btnmodifier = new Button("Repondre");
+         Button btnrepondre = new Button("Repondre");
         cnt1.add(L1);
         //cnt1.add(L2);
         cnt1.add(L3);
@@ -91,20 +91,17 @@ public class AfficherReclamationForm extends SideMenuBaseForm{
         if (r.getEtat()==1) {
             cnt3.add(btnsupprimer);
         }else if(r.getEtat()==0){
-             cnt3.add(btnmodifier);
+             cnt3.add(btnrepondre);
         }
         cnt1.add(cnt3);
         cnt1.getStyle().setBorder(Border.createLineBorder(0));
         Container cnt2 = new Container(BoxLayout.y());
         cnt2.add(cnt1);
 
-       /* btnsupprimer.addActionListener((e) -> {
-            if (ServiceReclamation.getInstance().deleteReclamation(r.getId())) {
-                refresh(res);
-            } else {
-                System.out.println("erreur dans la suppression");
-            }
-        });*/
+        btnrepondre.addActionListener((e) -> {
+           new ReponseForm(res, r).show();
+        }
+        );
        btnsupprimer.addPointerPressedListener(l->{
            Dialog dig = new Dialog("Suppression");
            if(dig.show("Suppression","Voulez-vous supprimer la reclamation?","Annuler","Oui")){
