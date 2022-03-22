@@ -32,6 +32,7 @@ import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
 import com.mycompany.myapp.entities.Reclamation;
 import com.mycompany.myapp.services.ServiceReclamation;
+import com.mycompany.myapp.services.SessionManager;
 import java.util.Date;
 
 /**
@@ -87,7 +88,7 @@ public class AjouterReclamationForm extends SideMenuBaseForm {
                         SimpleDateFormat format= new SimpleDateFormat("yyyy-MM-dd");
                        
 
-                        Reclamation r = new Reclamation(79,format.format(new Date()),0, Type.getSelectedItem().toString(),Description.getText().toString());
+                        Reclamation r = new Reclamation(SessionManager.getId(),format.format(new Date()),0, Type.getSelectedItem().toString(),Description.getText().toString());
                         if( ServiceReclamation.getInstance().addReclamation(r))
                         {
                            Dialog.show("Success","Connection accepted",new Command("OK"));

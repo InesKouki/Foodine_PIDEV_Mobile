@@ -45,7 +45,7 @@ public class ServiceReclamation {
     
     //Fonction Ajout
      public boolean addReclamation(Reclamation r) {
-       String url = Statics.BASE_URL + "addRecJson?type="+r.getType()+"&description="+r.getDescription();
+       String url = Statics.BASE_URL + "addRecJson?type="+r.getType()+"&description="+r.getDescription()+"&user_id="+r.getId_user();
        req.setUrl(url);
     
         req.addResponseListener(new ActionListener<NetworkEvent>() {

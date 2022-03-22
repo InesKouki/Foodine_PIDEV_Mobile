@@ -10,6 +10,7 @@ import com.codename1.io.ConnectionRequest;
 import com.codename1.io.JSONParser;
 import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
+import static com.codename1.processing.Result.JSON;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.TextField;
 import com.codename1.ui.events.ActionListener;
@@ -98,16 +99,14 @@ String url = Statics.BASE_URL + "signUpJson?nom="+nom.getText()+"&prenom="+preno
      
      
      public void signIn(TextField username, TextField password,Resources res){
+          User current_user = new User();
          String url = Statics.BASE_URL + "signInJson?username="+username.getText()+"&password="+password.getText();
         req = new ConnectionRequest(url, false); //false ya3ni url mazlt matba3thtich lel server
         req.setUrl(url);
         
         req.addResponseListener((e) ->{
-            
             JSONParser j = new JSONParser();
-            
             String json = new String(req.getResponseData()) + "";
-         
             try {
             
             if(json.equals("Utilisteur invalide")) {
@@ -117,12 +116,30 @@ String url = Statics.BASE_URL + "signUpJson?nom="+nom.getText()+"&prenom="+preno
             else {
                 System.out.println("data =="+json);
                 
-                Map<String,Object> user = j.parseJSON(new CharArrayReader(json.toCharArray()));
-         
-                if(user.size() >0 ) // l9a user
-                   // new ListReclamationForm(rs).show();//yemchi lel list reclamation
-                    new ProfileForm(res).show();
+                 Map<String,Object> user = j.parseJSON(new CharArrayReader(json.toCharArray()));
+                
+                
+             
+                //Session 
+               
+
+                if(user.size() >0 ){ // l9a user
                     
+                float id = Float.parseFloat(user.get("id").toString());
+                SessionManager.setId((int)id);//jibt id ta3 user ly3ml login w sajltha fi session ta3i
+                
+                SessionManager.setPassowrd(user.get("Password").toString());
+                SessionManager.setUserName(user.get("Username").toString());
+                SessionManager.setEmail(user.get("email").toString());
+                System.out.println(SessionManager.getUserName()+SessionManager.getId());
+                //photo 
+                
+                if(user.get("photo") != null)
+                    SessionManager.setPhoto(user.get("photo").toString());
+                
+                  
+                    new ProfileForm(res).show();
+                }
                     }
             
             }catch(Exception ex) {
@@ -135,7 +152,6 @@ String url = Statics.BASE_URL + "signUpJson?nom="+nom.getText()+"&prenom="+preno
     
          //ba3d execution ta3 requete ely heya url nestanaw response ta3 server.
         NetworkManager.getInstance().addToQueueAndWait(req);
-        
     }
      
      
