@@ -5,6 +5,7 @@
  */
 package com.mycompany.myapp.gui;
 
+import com.codename1.io.Storage;
 import com.codename1.ui.Container;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
@@ -13,6 +14,7 @@ import com.codename1.ui.Label;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.Layout;
 import com.codename1.ui.util.Resources;
+import com.mycompany.myapp.services.SessionManager;
 
 /**
  *
@@ -51,7 +53,13 @@ public abstract class SideMenuBaseForm extends Form {
         getToolbar().addMaterialCommandToSideMenu("Contact", FontImage.MATERIAL_TRENDING_UP,  e -> new AjouterReclamationForm(res).show());
         getToolbar().addMaterialCommandToSideMenu("Review", FontImage.MATERIAL_ACCESS_TIME,  e -> new AfficherAvisForm(res).show());
         //getToolbar().addMaterialCommandToSideMenu("Account Settings", FontImage.MATERIAL_SETTINGS,  e -> new UpdateProfileForm(res));
-        getToolbar().addMaterialCommandToSideMenu("Logout", FontImage.MATERIAL_EXIT_TO_APP,  e -> new LoginForm(res).show());
+        getToolbar().addMaterialCommandToSideMenu("Logout", FontImage.MATERIAL_EXIT_TO_APP,  e ->{
+            new LoginForm(res).show();
+            SessionManager.pref.clearAll();
+            Storage.getInstance().clearStorage();
+            Storage.getInstance().clearCache();
+        
+                });
     }
     
     protected abstract void showOtherForm(Resources res);
