@@ -261,6 +261,41 @@ String url = Statics.BASE_URL + "signUpJson?nom="+nom.getText()+"&prenom="+preno
     }
      
      
+    public ArrayList<User> getAllUsersTriNom(){
+        req = new ConnectionRequest();
+        String url = Statics.BASE_URL+"showUserTriNomJson";
+      
+        req.setUrl(url);
+        req.setPost(false);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                users = parseUsers(new String(req.getResponseData()));
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return users;
+    } 
+    
+    public ArrayList<User> getAllUsersTriEmail(){
+        req = new ConnectionRequest();
+        String url = Statics.BASE_URL+"showUserTriEmailJson";
+      
+        req.setUrl(url);
+        req.setPost(false);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                users = parseUsers(new String(req.getResponseData()));
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        return users;
+    } 
+     
+     
       public boolean bloquerUser(int i) {
         String url = Statics.BASE_URL + "blockUserJson/" + i;
         req.setUrl(url);

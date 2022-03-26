@@ -60,13 +60,27 @@ public class AfficherUtilisateurForm extends SideMenuBaseBackForm{
         //fab.getAllStyles().setMargin(BOTTOM, completedTasks.getPreferredH() - fab.getPreferredH() / 2);
         tb.setTitleComponent(fab.bindFabToContainer(titleCmp, RIGHT, TOP));
        ComboBox<String> Type = new ComboBox<>();
-       
-       
+        Type.addItem("Trier par Nom");
+        Type.addItem("Trier par Email");
+        Type.addItem("Aucun");
+        Type.setSelectedIndex(3);
+       add(Type);
         
+        Type.addActionListener((e)->{
+            String s = Type.getSelectedItem().toString();
+           if(s.equals("Aucun"))
+              refresh(res);
+           else if(s.equals("Trier par Nom"))
+           new AfficherUtilisateurTrierNom(res).show();
+           else
+              new AfficherUtilisateurTrierEmail(res).show();
+           
+        });
         SpanLabel sp = new SpanLabel();
         for (User r : ServiceUser.getInstance().getAllUsers()) {
             add(addItem(r,res));
         }
+        
         add(sp);
         setupSideMenu(res);
  
