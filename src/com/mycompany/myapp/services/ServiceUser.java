@@ -11,14 +11,17 @@ import com.codename1.io.JSONParser;
 import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
 import static com.codename1.processing.Result.JSON;
+import com.codename1.ui.Command;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.TextField;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.util.Resources;
 import com.mycompany.myapp.entities.User;
 import com.mycompany.myapp.gui.AfficherUtilisateurForm;
+import com.mycompany.myapp.gui.LoginForm;
 import com.mycompany.myapp.gui.ProfileForm;
 import com.mycompany.myapp.gui.ResetPasswordForm;
+import com.mycompany.myapp.gui.showProfileForm;
 import com.mycompany.myapp.utils.Statics;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -100,9 +103,8 @@ String url = Statics.BASE_URL + "signUpJson?nom="+nom.getText()+"&prenom="+preno
      
      
      public void signIn(TextField username, TextField password,Resources res){
-          User current_user = new User();
          String url = Statics.BASE_URL + "signInJson?username="+username.getText()+"&password="+password.getText();
-        req = new ConnectionRequest(url, false); //false ya3ni url mazlt matba3thtich lel server
+        req = new ConnectionRequest(url, false); 
         req.setUrl(url);
         
         req.addResponseListener((e) ->{
@@ -118,23 +120,19 @@ String url = Statics.BASE_URL + "signUpJson?nom="+nom.getText()+"&prenom="+preno
                 System.out.println("data =="+json);
                 
                  Map<String,Object> user = j.parseJSON(new CharArrayReader(json.toCharArray()));
-                
-                
-             
-                //Session 
-               
-
-                if(user.size() >0 ){ // l9a user
-                    
+  
+                if(user.size() >0 ){     
                 float id = Float.parseFloat(user.get("id").toString());
-                SessionManager.setId((int)id);//jibt id ta3 user ly3ml login w sajltha fi session ta3i
-                
+                SessionManager.setId((int)id);
                 SessionManager.setPassowrd(user.get("Password").toString());
                 SessionManager.setUserName(user.get("Username").toString());
                 SessionManager.setEmail(user.get("email").toString());
                 SessionManager.setRole(user.get("Roles").toString());
                 SessionManager.setNom(user.get("Nom").toString());
                 SessionManager.setPrenom(user.get("Prenom").toString());
+                float etat = Float.parseFloat(user.get("Etat").toString());
+                SessionManager.setEtat((int)etat);
+                
                   if(user.get("phone")!=null)
                   {
                       SessionManager.setTelephone(user.get("phone").toString());
@@ -144,18 +142,23 @@ String url = Statics.BASE_URL + "signUpJson?nom="+nom.getText()+"&prenom="+preno
                   {
                      SessionManager.setAdresse(user.get("Address").toString());
                   }
-                 
+                 if(user.get("file") != null)
+                    SessionManager.setFile(user.get("file").toString());
                 
-                System.out.println(SessionManager.getUserName()+SessionManager.getId()+SessionManager.getRole()+SessionManager.getRole().contains("ROLE_ADMIN")+SessionManager.getTelephone());
-                //photo 
+                System.out.println(SessionManager.getUserName()+SessionManager.getId()+SessionManager.getRole()+SessionManager.getRole().contains("ROLE_ADMIN")+SessionManager.getTelephone()+SessionManager.getFile()+SessionManager.getEtat());
                 
-                if(user.get("photo") != null)
-                    SessionManager.setPhoto(user.get("photo").toString());
-                
-                  if (SessionManager.getRole().contains("ROLE_ADMIN"))  
-                    new AfficherUtilisateurForm(res).show();
-                  else
-                       new ProfileForm(res).show();
+                    if (SessionManager.getUserName()==null)
+                     new LoginForm(res).show(); 
+                  if (SessionManager.getUserName()!= null && SessionManager.getRole().contains("ROLE_ADMIN"))
+                      new AfficherUtilisateurForm(res).show();
+                  else if (SessionManager.getUserName()!= null && SessionManager.getRole().contains("ROLE_USER")&& SessionManager.getEtat()==1)
+                       new showProfileForm(res).show();
+                  else if (SessionManager.getUserName()!= null && SessionManager.getRole().contains("ROLE_USER")&& SessionManager.getEtat()==0)
+                  {
+                        Dialog.show("Alert", "Vous etes bloqué", new Command("OK"));
+                        new LoginForm(res).show(); 
+                  }
+                  
                 }
                     }
             
@@ -167,7 +170,7 @@ String url = Statics.BASE_URL + "signUpJson?nom="+nom.getText()+"&prenom="+preno
             
         });
     
-         //ba3d execution ta3 requete ely heya url nestanaw response ta3 server.
+
         NetworkManager.getInstance().addToQueueAndWait(req);
     }
      

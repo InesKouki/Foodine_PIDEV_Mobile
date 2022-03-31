@@ -13,6 +13,7 @@ import com.codename1.ui.Toolbar;
 import java.io.IOException;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.io.NetworkEvent;
+import com.codename1.ui.Command;
 import com.mycompany.myapp.gui.AfficherAvisAdminForm;
 import com.mycompany.myapp.gui.AfficherAvisForm;
 import com.mycompany.myapp.gui.AfficherReclamationForm;
@@ -20,6 +21,7 @@ import com.mycompany.myapp.gui.AfficherUtilisateurForm;
 import com.mycompany.myapp.gui.AjouterReclamationForm;
 import com.mycompany.myapp.gui.LoginForm;
 import com.mycompany.myapp.gui.ProfileForm;
+import com.mycompany.myapp.gui.showProfileForm;
 import com.mycompany.myapp.services.SessionManager;
 
 /**
@@ -61,8 +63,20 @@ public class MyApplication {
         }
         if(SessionManager.getUserName()==null)
               new LoginForm(theme).show();
-        else
+        else if (SessionManager.getEtat()==0){
+            Dialog.show("Alert", "Vous etes bloqué", new Command("OK"));
+             new LoginForm(theme).show();
+        }
+            
+        else if( SessionManager.getRole() != null && SessionManager.getRole().contains("ROLE_ADMIN"))
             new AfficherUtilisateurForm(theme).show();
+        else 
+             try{
+                 new showProfileForm(theme).show();
+            }catch(IOException ex){
+            Dialog.show("Error",ex.getMessage(),"OK",null);
+        }
+       
    
     }
 

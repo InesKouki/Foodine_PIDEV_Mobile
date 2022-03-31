@@ -21,6 +21,7 @@ import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.util.Resources;
 import com.mycompany.myapp.services.ServiceUser;
 import com.mycompany.myapp.services.SessionManager;
+import java.io.IOException;
 
 /**
  *
@@ -76,7 +77,11 @@ public class UpdateProfileForm extends SideMenuBaseFrontForm{
        }else{
             ServiceUser.getInstance().updateprofile(SessionManager.getId(),nom,prenom,email,telephone,adresse);
             Dialog.show("Success", "Compte modifié  avec sucess", "Ok", null);
-             new showProfileForm(res).show();
+              try{
+                 new showProfileForm(res).show();
+            }catch(IOException ex){
+            Dialog.show("Error",ex.getMessage(),"OK",null);
+        }
        }
         });
         setupSideMenu(res);

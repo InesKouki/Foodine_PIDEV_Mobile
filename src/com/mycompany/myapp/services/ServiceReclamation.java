@@ -72,14 +72,7 @@ public class ServiceReclamation {
                 Reclamation t = new Reclamation();
                 float id = Float.parseFloat(obj.get("id").toString());
                 t.setId((int)id);
-                // float idUser = Float.parseObject(obj.get("user_id").toString());
-               // t.setId((int)idUser);
-                  /*String DateConverter = obj.get("created_at").toString().substring(obj.get("created_at").toString().indexOf("timestamp")+10,obj.get("created_at").toString().lastIndexOf("}"));
-                  Date currentTime = new Date(Double.valueOf(DateConverter).longValue()*1000);
-                  SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                  String dateString = formatter.format(currentTime);
-                  t.setCreated_at(dateString);*/
-                
+               
                   t.setType(obj.get("Type").toString());
                   float etat = Float.parseFloat(obj.get("Etat").toString());
                   t.setEtat((int)etat);

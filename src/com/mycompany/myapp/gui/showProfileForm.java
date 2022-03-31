@@ -9,23 +9,31 @@ import com.codename1.components.FloatingActionButton;
 import com.codename1.ui.Button;
 import static com.codename1.ui.Component.BOTTOM;
 import static com.codename1.ui.Component.CENTER;
+import static com.codename1.ui.Component.RIGHT;
+import static com.codename1.ui.Component.TOP;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
+import com.codename1.ui.EncodedImage;
 import com.codename1.ui.FontImage;
+import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.Toolbar;
+import com.codename1.ui.URLImage;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
 import com.mycompany.myapp.services.SessionManager;
+import com.mycompany.myapp.utils.Statics;
+import java.io.IOException;
 
 /**
  *
  * @author Asus
  */
 public class showProfileForm extends SideMenuBaseFrontForm {
-     public showProfileForm(Resources res){
+     public showProfileForm(Resources res) throws IOException{
        super(BoxLayout.y());
         Toolbar tb = getToolbar();
         tb.setTitleCentered(false);
@@ -53,6 +61,17 @@ public class showProfileForm extends SideMenuBaseFrontForm {
         fab.getAllStyles().setMarginUnit(Style.UNIT_TYPE_PIXELS);
         //fab.getAllStyles().setMargin(BOTTOM, completedTasks.getPreferredH() - fab.getPreferredH() / 2);
         tb.setTitleComponent(fab.bindFabToContainer(titleCmp, RIGHT, TOP));
+        if(SessionManager.getFile()!=null){
+            try{
+                 EncodedImage placeholder = EncodedImage.create("/test.jpg");
+              Image i = URLImage.createToStorage(placeholder,SessionManager.getFile(),Statics.BASE_URL+"/uploads/"+SessionManager.getFile(),URLImage.RESIZE_SCALE);
+              add(i);
+            }catch(IOException e){
+            Dialog.show("Error",e.getMessage(),"OK",null);
+        }
+            
+        }
+       
        Container box1 = BoxLayout.encloseX(new Label("Nom: "), new Label(SessionManager.getNom()));
        add(box1);
        Container box2 = BoxLayout.encloseX(new Label("Prenom: "), new Label(SessionManager.getPrenom()));

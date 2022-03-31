@@ -61,7 +61,11 @@ public class SignUpForm extends Form {
            Dialog.show("Erreur","Veuillez remplir les champs","OK",null);
        }else if(!password.getText().equals(confirm_password.getText())){
             Dialog.show("Erreur","Verifiez votre mot de passe","OK",null);
-       }else{
+       }else if (email.getText().contains("@")==false&&email.getText().contains(".")==false)
+        Dialog.show("Erreur","Verifiez votre Email","OK",null);
+       else if(password.getText().length()<8)
+            Dialog.show("Erreur","Votre mot de passe doit contenir au moins 8 caracteres","OK",null);
+       else{
             ServiceUser.getInstance().signUp(username,password,email,confirm_password,nom,prenom);
             Dialog.show("Success", "Compte crée avec sucess", "Ok", null);
              new LoginForm(theme).show();

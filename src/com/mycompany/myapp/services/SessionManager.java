@@ -11,23 +11,18 @@ import com.codename1.io.Preferences;
  * @author Asus
  */
 public class SessionManager {
-    public static Preferences pref ; // 3ibara memoire sghira nsajlo fiha data 
-    
-    
-    
-    // hethom données ta3 user lyt7b tsajlhom fi session  ba3d login 
+    public static Preferences pref ;
     private static int id ; 
-     private static String nom ;
-      private static String prenom ;
-      
+    private static String nom ;
+    private static String prenom ;  
     private static String userName ; 
     private static String email; 
     private static String passowrd ;
-    private static String photo;
+    private static String file;
     private static String role;
-     private static String adresse ;
-      private static String telephone ;
-
+    private static String adresse ;
+    private static String telephone ;
+    private static int etat;
     public static Preferences getPref() {
         return pref;
     }
@@ -37,11 +32,11 @@ public class SessionManager {
     }
 
     public static int getId() {
-        return pref.get("id",id);// kif nheb njib id user connecté apres njibha men pref 
+        return pref.get("id",id);
     }
 
     public static void setId(int id) {
-        pref.set("id",id);//nsajl id user connecté  w na3tiha identifiant "id";
+        pref.set("id",id);
     }
 
     public static String getUserName() {
@@ -68,12 +63,12 @@ public class SessionManager {
          pref.set("passowrd",passowrd);
     }
 
-    public static String getPhoto() {
-        return pref.get("photo",photo);
+    public static String getFile() {
+        return pref.get("file",file);
     }
 
-    public static void setPhoto(String photo) {
-         pref.set("photo",photo);
+    public static void setFile(String file) {
+         pref.set("file",file);
     }
 
     public static String getRole() {
@@ -114,6 +109,14 @@ public class SessionManager {
 
     public static void setTelephone(String telephone) {
         SessionManager.telephone = telephone;
+    }
+
+    public static int getEtat() {
+        return etat;
+    }
+
+    public static void setEtat(int etat) {
+        SessionManager.etat = etat;
     }
     
     

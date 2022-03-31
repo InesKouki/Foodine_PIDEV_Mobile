@@ -16,6 +16,7 @@ import com.codename1.ui.FontImage;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
 import com.codename1.ui.Toolbar;
+import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
@@ -24,6 +25,7 @@ import com.mycompany.myapp.entities.Review;
 import com.mycompany.myapp.services.ServiceReview;
 import com.mycompany.myapp.services.ServiceUser;
 import com.mycompany.myapp.services.SessionManager;
+import java.io.IOException;
 
 /**
  *
@@ -61,7 +63,7 @@ public class updatePasswordForm extends SideMenuBaseFrontForm{
         add(confirm_password);
         Button btnAjouter = new Button("Confirmer");
         add(btnAjouter);
-        btnAjouter.addActionListener((e)->{
+        btnAjouter.addActionListener((ActionEvent e)->{
            if( password.getText().length()==0&&confirm_password.getText().length()==0){
            
            Dialog.show("Erreur","Veuillez remplir les champs","OK",null);
@@ -70,7 +72,12 @@ public class updatePasswordForm extends SideMenuBaseFrontForm{
        }else{
             ServiceUser.getInstance().updatePass(SessionManager.getId(),password);
             Dialog.show("Success", "Mot de passe modifié avec succes", "Ok", null);
-             new showProfileForm(res).show();
+            try{
+                 new showProfileForm(res).show();
+            }catch(IOException ex){
+            Dialog.show("Error",ex.getMessage(),"OK",null);
+        }
+            
        }
         });
         setupSideMenu(res);

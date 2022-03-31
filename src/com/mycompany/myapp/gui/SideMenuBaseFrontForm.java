@@ -7,6 +7,7 @@ package com.mycompany.myapp.gui;
 
 import com.codename1.io.Storage;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
@@ -15,6 +16,7 @@ import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.Layout;
 import com.codename1.ui.util.Resources;
 import com.mycompany.myapp.services.SessionManager;
+import java.io.IOException;
 
 /**
  *
@@ -52,7 +54,11 @@ public abstract class SideMenuBaseFrontForm extends Form {
         getToolbar().addMaterialCommandToSideMenu("Accueil", FontImage.MATERIAL_DASHBOARD,  e -> new ProfileForm(res).show());
         getToolbar().addMaterialCommandToSideMenu("Reclamation", FontImage.MATERIAL_TRENDING_UP,  e -> new AjouterReclamationForm(res).show());
         getToolbar().addMaterialCommandToSideMenu("Avis", FontImage.MATERIAL_ACCESS_TIME,  e -> new AfficherAvisForm(res).show());
-        getToolbar().addMaterialCommandToSideMenu("Account Settings", FontImage.MATERIAL_SETTINGS,  e -> new showProfileForm(res).show());
+        getToolbar().addMaterialCommandToSideMenu("Account Settings", FontImage.MATERIAL_SETTINGS,  e ->{  try{
+                 new showProfileForm(res).show();
+            }catch(IOException ex){
+            Dialog.show("Error",ex.getMessage(),"OK",null);
+        }});
         getToolbar().addMaterialCommandToSideMenu("Deconnexion", FontImage.MATERIAL_EXIT_TO_APP,  e ->{
             new LoginForm(res).show();
             SessionManager.pref.clearAll();
