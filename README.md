@@ -1,1 +1,0 @@
-# Foodine_PIDEV_Mobile

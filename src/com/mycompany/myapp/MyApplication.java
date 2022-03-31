@@ -48,11 +48,8 @@ public class MyApplication {
     }
     
     public void start() {
-        if(current != null){
-            current.show();
-            return;
-        }
-      new LoginForm(theme).show();
+//        new HomeForm().show();
+    new LoginForm(theme).show();
     }
 
     public void stop() {
