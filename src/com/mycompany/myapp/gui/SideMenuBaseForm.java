@@ -52,12 +52,12 @@ public abstract class SideMenuBaseForm extends Form {
     }
     
     public void setupSideMenu(Resources res) {
-        Image profilePic = res.getImage("portrait.jpg");
+        Image profilePic = res.getImage("admin-photo.png");
         Image mask = res.getImage("round-mask.png");
         mask = mask.scaledHeight(mask.getHeight() / 4 * 3);
         profilePic = profilePic.fill(mask.getWidth(), mask.getHeight());
-        Label profilePicLabel = new Label("Aziz Msaddek", profilePic, "SideMenuTitle");
-        profilePicLabel.setMask(mask.createMask());
+        Label profilePicLabel = new Label("Admin", profilePic, "SideMenuTitle");
+//        profilePicLabel.setMask(mask.createMask());
 
         Container sidemenuTop = BorderLayout.center(profilePicLabel);
         sidemenuTop.setUIID("SidemenuTop");
@@ -72,6 +72,9 @@ public abstract class SideMenuBaseForm extends Form {
         getToolbar().addMaterialCommandToSideMenu("  Tables", FontImage.MATERIAL_EVENT_SEAT,  e -> new listtableform(res).show());
         getToolbar().addMaterialCommandToSideMenu("  Réservations", FontImage.MATERIAL_BOOK,  e -> new listreservationform(res).show());
         getToolbar().addMaterialCommandToSideMenu("  Livraisons", FontImage.MATERIAL_LOCAL_SHIPPING,  e -> new ListLivraisonForm(res).show());
+        getToolbar().addMaterialCommandToSideMenu("  Reclamations", FontImage.MATERIAL_CONTENT_PASTE,  e -> new AfficherReclamationForm(res).show());
+        getToolbar().addMaterialCommandToSideMenu("  Avis", FontImage.MATERIAL_DESCRIPTION,  e -> new AfficherAvisAdminForm(res).show());
+        getToolbar().addMaterialCommandToSideMenu("  Utilisateur", FontImage.MATERIAL_SETTINGS,  e -> new AfficherUtilisateurForm(res).show());
         getToolbar().addMaterialCommandToSideMenu("  Logout", FontImage.MATERIAL_EXIT_TO_APP,  e -> new LoginForm(res).show());
     }
     

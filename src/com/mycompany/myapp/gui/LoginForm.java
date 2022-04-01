@@ -1,26 +1,13 @@
 /*
- * Copyright (c) 2016, Codename One
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 
- * documentation files (the "Software"), to deal in the Software without restriction, including without limitation 
- * the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, 
- * and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions 
- * of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF 
- * CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
- * OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-
 package com.mycompany.myapp.gui;
 
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
@@ -28,35 +15,32 @@ import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
 import com.codename1.ui.Toolbar;
+import com.codename1.ui.events.ActionEvent;
+import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.util.Resources;
+import com.mycompany.myapp.services.ServiceUser;
 
 /**
- * The Login form
  *
- * @author Shai Almog
+ * @author ASUS
  */
 public class LoginForm extends Form {
     public LoginForm(Resources theme) {
         super(new BorderLayout(BorderLayout.CENTER_BEHAVIOR_CENTER_ABSOLUTE));
         setUIID("LoginForm");
         Container welcome = FlowLayout.encloseCenter(
-                new Label("Welcome, ", "WelcomeWhite"),
-                new Label("Aziz", "WelcomeBlue")
+                new Label("Bienvenue ", "WelcomeWhite"),
+                new Label("", "WelcomeBlue")
         );
         
         getTitleArea().setUIID("Container");
+     
         
-        Image profilePic = theme.getImage("portrait.jpg");
-        Image mask = theme.getImage("round-mask.png");
-        profilePic = profilePic.fill(mask.getWidth(), mask.getHeight());
-        Label profilePicLabel = new Label(profilePic, "ProfilePic");
-        profilePicLabel.setMask(mask.createMask());
-        
-        TextField login = new TextField("azizmdk@outlook.com", "Login", 20, TextField.EMAILADDR) ;
-        TextField password = new TextField("password", "Password", 20, TextField.PASSWORD) ;
+        TextField login = new TextField("", "Login", 20, TextField.ANY) ;
+        TextField password = new TextField("", "Password", 20, TextField.PASSWORD) ;
         login.getAllStyles().setMargin(LEFT, 0);
         password.getAllStyles().setMargin(LEFT, 0);
         Label loginIcon = new Label("", "TextField");
@@ -68,15 +52,31 @@ public class LoginForm extends Form {
         
         Button loginButton = new Button("LOGIN");
         loginButton.setUIID("LoginButton");
-        loginButton.addActionListener(e -> {
-//            Toolbar.setGlobalToolbar(false);
-            new EventsForm(theme).show();
-//            Toolbar.setGlobalToolbar(true);
+        loginButton.addActionListener(new ActionListener()  {
+             @Override
+            public void actionPerformed(ActionEvent evt) {
+          if(login.getText().length()==0 || password.getText().length()==0){
+           
+           Dialog.show("Erreur","Veuillez remplir les champs","OK",null);  
+          }else {
+                   ServiceUser.getInstance().signIn(login,password,theme);
+                
+                 
+          }
+            }
         });
         
-        Button createNewAccount = new Button("CREATE NEW ACCOUNT");
+        Button createNewAccount = new Button("Créer un nouveau compte");
+        Button forgetPassword = new Button("Mot de passe oublié");
+        createNewAccount.addActionListener(e -> {
+            new SignUpForm(theme).show();
+        });
         createNewAccount.setUIID("CreateNewAccountButton");
+        forgetPassword.setUIID("CreateNewAccountButton");
         
+         forgetPassword.addActionListener(e -> {
+            new ForgetPasswordForm(theme).show();
+        });
         // We remove the extra space for low resolution devices so things fit better
         Label spaceLabel;
         if(!Display.getInstance().isTablet() && Display.getInstance().getDeviceDensity() < Display.DENSITY_VERY_HIGH) {
@@ -88,14 +88,15 @@ public class LoginForm extends Form {
         
         Container by = BoxLayout.encloseY(
                 welcome,
-                profilePicLabel,
+              
                 spaceLabel,
                 BorderLayout.center(login).
                         add(BorderLayout.WEST, loginIcon),
                 BorderLayout.center(password).
                         add(BorderLayout.WEST, passwordIcon),
                 loginButton,
-                createNewAccount
+                createNewAccount,
+                forgetPassword
         );
         add(BorderLayout.CENTER, by);
         
